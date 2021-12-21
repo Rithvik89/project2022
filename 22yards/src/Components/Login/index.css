@@ -1,0 +1,91 @@
+/*this is css*/
+.header{
+    background-color: white;
+    height:8vh;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  
+  .section{
+    height:80vh;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .username-input{
+    display: block;
+    height: 30px;
+    max-width: 220px;
+    margin-bottom: 15px;
+    border: 1px black solid
+    ;
+ }
+.password-input{
+    display: block;
+    height: 30px;
+    max-width: 220px;
+    margin-bottom: 15px;
+    border: 1px black solid
+    ;
+ }
+.login-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+ }
+ .login-submit-button{
+     height: 35px;
+     width: 100px;
+     text-align: center;
+ }
+  @media (min-width:720px){
+    .container{
+      display:flex;
+      flex-direction:column;
+      min-height: 100vh;
+      background-image:url('https://res.cloudinary.com/dhz8n0ka8/image/upload/v1640021109/WhatsApp_Image_2021-12-20_at_1.23.44_PM_krendx.jpg');
+    }
+    .card{
+      background-color: white;
+      height:300px;
+      width:300px;
+      border-radius: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+    }
+    /* .logo{
+      height:60px;
+      width:75px;
+    } */
+  }
+  
+  @media (max-width:719px){
+    .container{
+      display:flex;
+      flex-direction:column;
+      min-height: 100vh;
+      background-image:url('https://res.cloudinary.com/dhz8n0ka8/image/upload/v1640060093/WhatsApp_Image_2021-12-19_at_11.52.40_PM_ca83jc.jpg');
+      background-size: cover;
+    }
+    .card{
+      background-color: white;
+      height:300px;
+      width:65vw;
+      border-radius: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+    }
+    /* .logo{
+      margin-left: 15px;
+      height:50px;
+      width:75px;
+    } */
+  }
+  
+  

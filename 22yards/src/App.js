@@ -1,19 +1,12 @@
 import './App.css';
+import Login from './Components/Login';
 
 function App() {
   return (
-    <div className="container">
-        <div className="header">
-          <div className="logoContainer">
-          </div>
-        </div>
-        <div className="section">
-          <div className="card">
-             
-          </div>
-        </div>
-        <div></div>
-    </div>
+    <>
+    <Login/>
+      
+    </>
   );
 }
 
