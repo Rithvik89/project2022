@@ -1,34 +1,69 @@
-/*this is css*/
 .header{
     background-color: white;
-    height:8vh;
+    height:62.5px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+    position:sticky;
+    top:0;
   }
+
+.logo-container{
+     padding:10px;
+     display: flex;
+     justify-content: space-between;
+}
+.logo{
+  height:50px;
+}
+.icon-container{
+  padding:5px;
+}
+.icon-details{
+  font-size:30px;
+  margin:5px;
+}
   
-  .section{
-    height:80vh;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-  }
+.section{
+  height:80vh;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signin-signup-card{
+  display:flex;
+}
+.signin-signup-heading{
+  font-family: Pacifico;
+}
   
-  .username-input{
+  .handle-input{
     display: block;
     height: 30px;
     max-width: 220px;
     margin-bottom: 15px;
-    border: 1px black solid
-    ;
+    border: 1px black solid;
+    border-radius: 5px;
+    font-family: Pacifico;
  }
 .password-input{
     display: block;
     height: 30px;
     max-width: 220px;
     margin-bottom: 15px;
-    border: 1px black solid
-    ;
+    border: 1px black solid;
+    border-radius: 5px;
+    font-family: Pacifico;
  }
+ .email-input{
+  display: block;
+  height: 30px;
+  max-width: 220px;
+  margin-bottom: 15px;
+  border: 1px black solid;
+  border-radius: 5px;
+  font-family: Pacifico;
+}
 .login-form{
     display: flex;
     flex-direction: column;
@@ -39,7 +74,21 @@
      height: 35px;
      width: 100px;
      text-align: center;
+     border-radius: 5px;
+     border:1px solid black
  }
+.footer-container{
+  /* min-height:8.5vh; */
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.icon-details-footer{
+  font-size:25px;
+  margin:5px;
+}
+
   @media (min-width:720px){
     .container{
       display:flex;
@@ -57,10 +106,6 @@
       align-items: center;
       padding: 10px;
     }
-    /* .logo{
-      height:60px;
-      width:75px;
-    } */
   }
   
   @media (max-width:719px){
@@ -75,17 +120,29 @@
       background-color: white;
       height:300px;
       width:65vw;
-      border-radius: 15px;
+      border-radius:0 0 15px 15px;
       display: flex;
       flex-direction: column;
       align-items: center;
       padding: 10px;
+      border:1px solid black
     }
-    /* .logo{
-      margin-left: 15px;
-      height:50px;
-      width:75px;
-    } */
-  }
+    .signin-signup-button{
+      background-color: white;
+      width:35.5vw;
+      height:35px;
+      border:0.5px solid black;
+      font-family: Pacifico;
+    }
+    .footer{
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      background-color: white;
+      height:45px;
+      padding:5px;
+      display: flex;
+      justify-content: space-around;
+    }
+}
   
   
