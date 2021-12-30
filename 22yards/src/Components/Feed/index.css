@@ -1,0 +1,29 @@
+.mid-section{
+    display:flex;
+}
+
+@media (max-width:769px){
+    .footer-left{
+       display: none;
+      }
+    .footer-right{
+        display: none;
+    }
+   .card{
+      background-color: white;
+      margin-top:15px;
+   }
+}
+
+@media (min-width:768px){
+   .footer-left{
+     width:25vw;
+   }
+   .footer-right{
+       width:30vw;
+   }
+   .card{
+    background-color: white;
+    margin:15px;
+   }
+}

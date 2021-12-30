@@ -1,35 +1,43 @@
-import './App.css';
-import Login from './Components/Login';
-import { IoIosNotifications,IoIosLogOut } from "react-icons/io";
-import {FaUserCircle} from "react-icons/fa";
-import {AiFillHome} from "react-icons/ai";
-import {GrAddCircle} from "react-icons/gr";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from "react-router-dom";
+import './App.css'
+import Header from './Components/Header'
+import Feed from './Components/Feed'
+import Networks from './Components/Networks'
+import Profile from './Components/Profile'
+import Logout from './Components/Logout'
+import Notifications from './Components/Notifications'
 
-function App() {
-  return (
-    <div className='app-container'>
-       <div className="header">
-          <div className="logo-container">
-                <img src="https://res.cloudinary.com/dhz8n0ka8/image/upload/v1640024219/logo_aygf3h.png" className="logo"/>
-                <div className='icon-container'>
-                <input type="search"/>
-                <IoIosLogOut className='icon-details'/>
-                </div>
-          </div>
-        </div>
-        <div className='middle'>
-         <Login/>
-       </div>
-       <div className="footer-container">
-            <div className='footer'>
-                <IoIosNotifications className='icon-details-footer'/>
-                <FaUserCircle className='icon-details-footer'/>
-                <AiFillHome className='icon-details-footer'/>
-                <GrAddCircle className='icon-details-footer'/>
-            </div>
-       </div>
-    </div>
-  );
+const isLoggedIn=false
+
+function App(){
+  if(!isLoggedIn){
+    return (
+      <BrowserRouter>
+      <div className='page1'>
+        <Header/>
+         <Routes>
+           <Route path="/" element={<Feed/>}/>
+           <Route path="/notifications" element={<Notifications/>}/>
+           <Route path="/profile" element={<Profile/>}/>
+           <Route path="/networks" element={<Networks/>}/>
+           <Route path="/logout" element={<Logout/>}/>
+         </Routes>
+         </div>
+      </BrowserRouter>
+    )
+  }
+  else{
+    return (
+      <BrowserRouter className="authenticate-container">
+          
+      </BrowserRouter>
+    )
+  }
 }
 
-export default App;
+export default App
