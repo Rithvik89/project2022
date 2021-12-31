@@ -1,5 +1,24 @@
+import {Card,Button,Container} from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './index.css'
+import LeftCard from './leftCard.js';
+import MainCard from './mainCard.js';
 function Notifications(){
-    return <h1>No Notifications Yet......</h1>
+    return (
+        <Container  className='components'>
+            <LeftCard />
+            <MainCard />
+            <MainCard />
+            <MainCard />
+            <MainCard />
+            <MainCard />
+            <MainCard />
+            <MainCard />
+            <MainCard />
+            <MainCard />
+
+        </Container>
+    );
 }
 
 export default Notifications
