@@ -1,4 +1,15 @@
 .page1{
     background-color: #e0e6e2;
-    min-height: 100vh;
+    /* min-height: 100vh; */
+    /* border: solid 3px red; */
+    margin:5%;
+}
+.nav-bar{
+    position: fixed;
+    width: 100%;
+    margin-top: -5.5%;
+    z-index: 1;
+}
+body{
+    background-color: #e0e6e2;
 }

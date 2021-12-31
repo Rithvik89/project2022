@@ -1,10 +1,10 @@
 import {Navbar,Nav,Container,Button} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Link} from 'react-router-dom'
-
+import './index.css'
 function Header(){
     return (
-        <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
+        <Navbar collapseOnSelect expand="md" bg="dark" variant="dark" className="nav-bar">
         <Container>
         <Navbar.Brand as={Link} to="/">22Yards</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav"/>

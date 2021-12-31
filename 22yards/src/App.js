@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {Container} from 'react-bootstrap'
 import {
   BrowserRouter,
   Routes,
@@ -18,8 +19,8 @@ function App(){
   if(!isLoggedIn){
     return (
       <BrowserRouter>
-      <div className='page1'>
-        <Header/>
+       <Header/>
+      <Container className='page1'>
          <Routes>
            <Route path="/" element={<Feed/>}/>
            <Route path="/notifications" element={<Notifications/>}/>
@@ -27,7 +28,7 @@ function App(){
            <Route path="/networks" element={<Networks/>}/>
            <Route path="/logout" element={<Logout/>}/>
          </Routes>
-         </div>
+        </Container>
       </BrowserRouter>
     )
   }

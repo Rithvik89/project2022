@@ -1,11 +1,11 @@
-import {Card,Button} from 'react-bootstrap'
+  import {Card,Button,Container} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
 
 function Feed(){
    return (
-    <div className="mid-section">
-    <div className="footer-left">
+    <Container className="mid-section">
+    <Container className="footer-left">
     <Card className="card">
     <Card.Body>
       <Card.Title>Card Title</Card.Title>
@@ -16,8 +16,8 @@ function Feed(){
       <Button variant="dark">Go somewhere</Button>
     </Card.Body>
   </Card>
-    </div>
-    <div className="footer-mid">
+    </Container>
+    <Container className="footer-mid">
     <Card className="card">
     <Card.Body>
       <Card.Title>Card Title</Card.Title>
@@ -68,8 +68,8 @@ function Feed(){
         <Button variant="dark">Go somewhere</Button>
       </Card.Body>
     </Card>
-    </div>
-    <div className='footer-right'>
+    </Container>
+    <Container className='footer-right'>
       <Card className="card">
         <Card.Body>
           <Card.Title>Card Title</Card.Title>
@@ -80,8 +80,8 @@ function Feed(){
           <Button variant="dark">Go somewhere</Button>
         </Card.Body>
       </Card>
-     </div>
-  </div>
+     </Container>
+  </Container>
    )
 }
 export default Feed
