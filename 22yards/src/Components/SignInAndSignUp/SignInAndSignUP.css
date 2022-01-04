@@ -1,0 +1,28 @@
+.signInSignUp-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+
+}
+.signin-signup-button-container{
+    display: flex;
+    flex-direction: row;
+}
+.signin-signUp-container{
+    width: 350px;
+    height: 400px;
+    display: flex;
+}
+.login-page-button{
+    width: 175px;
+    height: 40px;
+}
+.loginpage-input-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
