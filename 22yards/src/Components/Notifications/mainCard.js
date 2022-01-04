@@ -15,16 +15,6 @@ function mainCard(){
                   
 Your Friday Daily Rundown. Don't sell yourself short in negotiations; When to move on from a job?; and other top news for you
               </Card.Text>
-              <Dropdown>
-                     <Dropdown.Toggle variant="success" id="dropdown-basic">
-                            
-                     </Dropdown.Toggle>
-
-                 <Dropdown.Menu>
-                    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                     <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                 </Dropdown.Menu>
-            </Dropdown>
             </Card.Body>
         </Card>
         </Container>

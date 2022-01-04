@@ -1,6 +1,17 @@
 .mid-section{
     display:flex;
 }
+.feed-content-card-header{
+    display:flex;
+}
+.feed-content-user-handle{
+    margin-top: 15px;
+    margin-left: 10px;
+}
+.feed-content-metadata{
+     display:flex;
+     justify-content: space-around;
+}
 
 @media (max-width:769px){
     .footer-left{
