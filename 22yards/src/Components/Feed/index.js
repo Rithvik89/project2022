@@ -7,7 +7,7 @@ function Feed(){
    return (
     <Container className="mid-section">
     <Container className="footer-left">
-    <Card className="card">
+    <Card className="card-feed">
     <Card.Body>
       <Card.Title>Card Title</Card.Title>
       <Card.Text>

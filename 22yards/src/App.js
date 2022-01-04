@@ -12,6 +12,7 @@ import Networks from './Components/Networks'
 import Profile from './Components/Profile'
 import Logout from './Components/Logout'
 import Notifications from './Components/Notifications'
+import SignInAndSignUP from './Components/SignInAndSignUp/SignInAndSignUP';
 
 const isLoggedIn=false
 
@@ -35,7 +36,9 @@ function App(){
   else{
     return (
       <BrowserRouter className="authenticate-container">
-          
+        <Routes>
+           <Route path="/signInSignUp" element={<SignInAndSignUP/>}/>
+        </Routes>
       </BrowserRouter>
     )
   }

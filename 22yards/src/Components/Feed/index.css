@@ -12,6 +12,9 @@
      display:flex;
      justify-content: space-around;
 }
+.feed-margin{
+    margin-bottom:10px;
+}
 
 @media (max-width:769px){
     .footer-left{
@@ -20,7 +23,7 @@
     .footer-right{
         display: none;
     }
-   .card{
+   .card-feed{
       background-color: white;
       margin-top:15px;
    }
@@ -40,8 +43,5 @@
    .footer-right{
        width:30vw;
    }
-   .card{
-    background-color: white;
-    margin:15px;
-   }
+   
 }
