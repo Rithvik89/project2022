@@ -1,4 +1,4 @@
-import {Card,Button,Container,Dropdown} from 'react-bootstrap'
+import {Card,Container} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
 function NotifMainCard(){
@@ -15,6 +15,9 @@ function NotifMainCard(){
                   
 Your Friday Daily Rundown. Don't sell yourself short in negotiations; When to move on from a job?; and other top news for you
               </Card.Text>
+                    <button className='notif-main-card-button'>
+                    <img alt="" className = 'notif-main-card-side-img'src="https://cdn4.iconfinder.com/data/icons/business-office-32/24/Material_icons-07-98-512.png"/>
+                    </button>
             </Card.Body>
         </Card>
         </Container>
