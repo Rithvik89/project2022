@@ -3,15 +3,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './EachNetworkCard.css'
 
 export default function EachNetworkCard(props){
+    var height;
+    height = Math.floor(Math.random()*(400)+100);
+    console.log(height);
+    var link = "https://picsum.photos/"+height+"/"+height;
     return(
-    <Card className="card-network">
-    <Card.Body>
-      <Card.Title>{props.Title}</Card.Title>
-      <Card.Text>
-        {props.Text}
-      </Card.Text>
-      <Button variant="dark">{props.Button}</Button>
-    </Card.Body>
-    </Card>
+    <div className='card-network'>
+       <img src={link} className='netwrok-card-image'/>
+       <h6>#CRicket</h6>
+       <p>ITS ABOUT ME</p>
+       <p>{height} no of mutuals</p>
+    </div>
     )
 }

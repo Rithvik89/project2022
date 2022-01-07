@@ -10,7 +10,7 @@ function FeedContent(){
     console.log(height);
     var link = "https://picsum.photos/"+height+"/"+height;
     return (
-        <Card className="text-center feed-margin">
+            <Card className="text-center feed-margin">
             <Card.Header>
                 <div className="feed-content-card-header">
                     <Card.Img variant="top" src={link}  className='main-card-img'/>
@@ -20,7 +20,7 @@ function FeedContent(){
             <Card.Body>
                 <Card.Title>Concerned in senior players form</Card.Title>
                 <Card.Text>
-                    They are low on confidence, their form has hit a terrible trough, and on Monday when the situation demanded it, India's most-experienced batting pair was unable to handle the heat in the kitchen
+                     They are low on confidence, their form has hit a terrible trough, and on Monday when the situation demanded it, India's most-experienced batting pair was unable to handle the heat in the kitchen
                 </Card.Text>
             </Card.Body>
             <Card.Footer className="text-muted">
@@ -30,7 +30,7 @@ function FeedContent(){
                 <FaShare fontSize="20px"/>
                </div>
             </Card.Footer>
-        </Card>
+          </Card>
     )
 }
 export default FeedContent
