@@ -2,22 +2,20 @@ body{
     padding: 0px;
 }
 
-.card-network{
+.network-card{
     background-color: white;
     padding: 0px;
-    margin: 15px;
-    width: 100%;
-    height: 250px;
-    width: 200px;
+    height: 225px;
+    width: 160px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(#216fed 25%,#ffffff 20%);
+    background: linear-gradient(#eef1f8 25%,#ffffff 20%);
     border-radius: 10px;
-    border: 1px grey solid;
     margin-bottom: 5px;
     margin-top: 5px;
+    margin-right: 8px;
 }
 .netwrok-card-image{
     width: 75px;
@@ -25,19 +23,4 @@ body{
     border-radius: 37.5px;
     position: relative;
     top: -12.5px;
-}
-@media (max-width:769px) {
-   .card-network{
-        background-color: white;
-        margin: 0px;
-        margin-bottom: 5px;
-        margin-top: 5px;
-        width: 100%;
-        height: 250px;
-        width: 45vw;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-     }   
 }

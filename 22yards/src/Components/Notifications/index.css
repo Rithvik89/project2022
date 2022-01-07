@@ -39,6 +39,7 @@
 }
 .notif-main-card{
     border-radius: 10px;
+    margin-bottom: 5px;
 }
 .notif-main-card-body{
     flex-direction: row;

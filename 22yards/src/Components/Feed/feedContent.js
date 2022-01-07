@@ -10,7 +10,7 @@ function FeedContent(){
     console.log(height);
     var link = "https://picsum.photos/"+height+"/"+height;
     return (
-            <Card className="text-center feed-margin">
+            <Card className="text-center feed-cards">
             <Card.Header>
                 <div className="feed-content-card-header">
                     <Card.Img variant="top" src={link}  className='feed-main-card-img'/>

@@ -95,7 +95,7 @@ const footerMid=[
 
 function Networks(){
    return (
-    <div className="networks-mid-section">
+    <div className="network-mid-section">
        {
           footerMid.map((each)=>
           <EachNetworkCard Title={each.Title} Text={each.Text} Button={each.Button}/>

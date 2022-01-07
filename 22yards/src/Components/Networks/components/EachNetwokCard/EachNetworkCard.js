@@ -8,7 +8,7 @@ export default function EachNetworkCard(props){
     console.log(height);
     var link = "https://picsum.photos/"+height+"/"+height;
     return(
-    <div className='card-network'>
+    <div className='network-card'>
        <img src={link} className='netwrok-card-image'/>
        <h6>#CRicket</h6>
        <p>ITS ABOUT ME</p>

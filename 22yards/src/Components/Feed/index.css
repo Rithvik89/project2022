@@ -43,7 +43,8 @@
      display:flex;
      justify-content: space-around;
 }
-.feed-margin{
+.feed-cards{
+    border-radius: 10px;
     margin-bottom:10px;
 }
 .feed-main-card-img{
