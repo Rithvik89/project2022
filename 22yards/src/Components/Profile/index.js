@@ -1,5 +1,12 @@
+import { Container } from 'react-bootstrap';
+import './index.css';
+import Mainprofile from './mainProfile';
 function Profile(){
-    return <h1>No Profile Yet......</h1>
+    return (
+         <Container className="profile-mid-section">
+              <Mainprofile />
+         </Container>
+    );
 }
 
 export default Profile
