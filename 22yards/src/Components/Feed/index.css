@@ -46,3 +46,8 @@
 .feed-margin{
     margin-bottom:10px;
 }
+.feed-main-card-img{
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+}

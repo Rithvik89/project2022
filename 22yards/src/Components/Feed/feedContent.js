@@ -13,7 +13,7 @@ function FeedContent(){
             <Card className="text-center feed-margin">
             <Card.Header>
                 <div className="feed-content-card-header">
-                    <Card.Img variant="top" src={link}  className='main-card-img'/>
+                    <Card.Img variant="top" src={link}  className='feed-main-card-img'/>
                     <h4 className='feed-content-user-handle'>#Rithvik_{height}</h4>
                 </div>
             </Card.Header>
