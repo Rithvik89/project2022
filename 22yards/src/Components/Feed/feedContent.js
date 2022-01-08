@@ -1,36 +1,48 @@
-import {Card,Button} from 'react-bootstrap'
+import {Card,Button,Modal} from 'react-bootstrap';
+import {Link} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { AiFillLike } from "react-icons/ai";
-import { FaCommentAlt,FaShare } from "react-icons/fa";
+import { FaShare } from "react-icons/fa";
 import './index.css'
+import Comment from './Comment';
 
-function FeedContent(){
-    var height;
-    height = Math.floor(Math.random()*(400)+100);
-    console.log(height);
-    var link = "https://picsum.photos/"+height+"/"+height;
+
+function FeedContent(props){
+    const {posts}=props
     return (
-            <Card className="text-center feed-cards">
-            <Card.Header>
-                <div className="feed-content-card-header">
-                    <Card.Img variant="top" src={link}  className='feed-main-card-img'/>
-                    <h4 className='feed-content-user-handle'>#Rithvik_{height}</h4>
-                </div>
-            </Card.Header>
-            <Card.Body>
-                <Card.Title>Concerned in senior players form</Card.Title>
-                <Card.Text>
-                     They are low on confidence, their form has hit a terrible trough, and on Monday when the situation demanded it, India's most-experienced batting pair was unable to handle the heat in the kitchen
-                </Card.Text>
-            </Card.Body>
-            <Card.Footer className="text-muted">
-               <div className="feed-content-metadata">
-                <AiFillLike fontSize="25px"/>
-                <FaCommentAlt fontSize="20px"/>
-                <FaShare fontSize="20px"/>
-               </div>
-            </Card.Footer>
-          </Card>
+           posts.map(post=>{
+               const {link,user,content,id}=post
+               return (
+                <Card className="text-center feed-cards">
+                    
+                    <Card.Header>
+                        <div className="feed-content-card-header">
+                            <Card.Img variant="top" src={link}  className='feed-main-card-img'/>
+                            <h4 className='feed-content-user-handle'>{post.user}</h4>
+                        </div>
+                    </Card.Header>
+
+                    <Link to={`/feed/${id}`} style={{ textDecoration: 'none',color:'black' }}>
+                        <Card.Body>
+                            <Card.Title>Concerned in senior players form</Card.Title>
+                            <Card.Text>
+                                {post.content}
+                            </Card.Text>
+                        </Card.Body>
+                    </Link>
+
+                    <Card.Footer className="text-muted">
+                    <div className="feed-content-metadata">
+                        <Button variant="outline-dark"> <AiFillLike fontSize="25px"/></Button>
+                        <Comment postDetails={post}/>
+                        <Button variant="outline-dark"> <FaShare fontSize="20px"/></Button>
+                    </div>
+                    </Card.Footer>
+
+                </Card>
+               )
+           }
+                )
     )
 }
 export default FeedContent

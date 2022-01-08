@@ -3,8 +3,7 @@
     justify-content: center;
     align-items: center;
     width: 100vw;
-    height: 100vh;
-
+    height: calc(100vh - 69px);
 }
 .signin-signup-button-container{
     display: flex;
@@ -14,6 +13,7 @@
     width: 350px;
     height: 400px;
     display: flex;
+    border-radius: 10px;
 }
 .login-page-button{
     width: 175px;

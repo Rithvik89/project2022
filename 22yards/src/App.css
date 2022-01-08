@@ -1,9 +1,14 @@
+.full-page{
+    background-image: url('https://res.cloudinary.com/dhz8n0ka8/image/upload/v1641640237/WhatsApp_Image_2022-01-08_at_4.37.11_PM_qnwkxy.jpg');
+    background-size: cover;
+}
+
 .header{
     height:65px;
 }
 .routing-page{
     display: flex;
-    height: 100%;
+    height: calc(100vh - 65px);
     top:65px;
 }
 

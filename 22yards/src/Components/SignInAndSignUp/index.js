@@ -1,15 +1,18 @@
 import React,{useState} from "react";
 import {Card,Button,Container} from 'react-bootstrap'
-import './SignInAndSignUP.css'
+import './index.css'
 import InputElement from "./Util/Input/Input";
 
 
 export default function SignInAndSignUP(){
    
-    const [isSignUp,setSignUp]=useState(true)
+    const [isSignUp,setSignUp]=useState(false)
 
     function changeSignUp(){
-        setSignUp(!isSignUp)
+        setSignUp(true)
+    }
+    function changeSignIn(){
+        setSignUp(false)
     }
 
     return(
@@ -17,25 +20,25 @@ export default function SignInAndSignUP(){
            <Card className="signin-signUp-container">
             <div className="signin-signup-button-container">
                 <button className="login-page-button" onClick={changeSignUp}>SignUp</button>
-                <button className="login-page-button" onClick={changeSignUp}>SignIn</button>
+                <button className="login-page-button" onClick={changeSignIn}>SignIn</button>
             </div>
            { 
-             isSignUp 
+             !isSignUp 
                &&
              <div className="loginpage-input-container">
                  <InputElement type="text" placeholder="@username"/>
                  <InputElement type="password" placeholder="@password"/>
-                 <Button>SignUp</Button>
+                 <Button variant="secondary">SignIn</Button>
              </div>
            }
            {
-               !isSignUp
+               isSignUp
                  &&
                 <div className="loginpage-input-container">
                      <InputElement type="text" placeholder="enter username"/>
                      <InputElement type="password" placeholder="enter password"/>
                      <InputElement type="password" placeholder="re-enter password"/>
-                     <Button>SignUp</Button>
+                     <Button variant="secondary">SignUp</Button>
                 </div>
            }
            </Card>
