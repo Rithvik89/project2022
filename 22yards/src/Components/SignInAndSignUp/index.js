@@ -7,6 +7,11 @@ import InputElement from "./Util/Input/Input";
 export default function SignInAndSignUP(){
    
     const [isSignUp,setSignUp]=useState(false)
+    const [signInUsername,setSignInUsername]=useState('')
+    const [signInPassword,setSignInPassword]=useState('')
+    const [signUpUsername,setSignUpUsername]=useState('')
+    const [signUpPassword,setSignUpPassword]=useState('')
+
 
     function changeSignUp(){
         setSignUp(true)

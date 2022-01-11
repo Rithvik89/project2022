@@ -31,7 +31,10 @@ function App(){
                 <Route path="/feed" element={<Feed/>}/>
                 <Route path="/feed/:id" element={<FeedBody/>}/>
                 <Route path="/notifications" element={<Notifications/>}/>
-                <Route path="/profile" element={<Profile/>}/>
+                <Route path="/profile" element={<Profile/>}>
+                     
+                </Route>
+
                 <Route path="/networks" element={<Networks/>}/>
                 <Route path="/logout" element={<Logout/>}/>
           </Routes>
