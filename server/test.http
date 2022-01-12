@@ -1,0 +1,17 @@
+post http://localhost:1337/register
+Content-Type: application/json
+
+{
+    "emailid":"rithvikalkanti@gmail.com",
+    "username":"rithvik",
+    "password":"rithvik123"
+}
+
+###
+post http://localhost:1337/login
+Content-Type: application/json
+
+{
+    "username":"rthvik",
+    "password":"rithvik123"
+}
