@@ -13,7 +13,9 @@ import Logout from './Components/Logout'
 import Notifications from './Components/Notifications'
 import SignInAndSignUp from './Components/SignInAndSignUp'
 import FeedBody from './Components/Feed/FeedBody';
-
+import Posts from './Components/Posts';
+import Followers from './Components/Followers';
+import Following from './Components/Following';
 function App(){
   return (
     <BrowserRouter>
@@ -32,7 +34,9 @@ function App(){
                 <Route path="/feed/:id" element={<FeedBody/>}/>
                 <Route path="/notifications" element={<Notifications/>}/>
                 <Route path="/profile" element={<Profile/>}>
-                     
+                   <Route path="posts" element={<Posts/>}/> 
+                   <Route path="followers" element={<Followers/>}/>
+                   <Route path="Following" element={<Following/>}/>
                 </Route>
 
                 <Route path="/networks" element={<Networks/>}/>
