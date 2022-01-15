@@ -16,8 +16,11 @@ import FeedBody from './Components/Feed/FeedBody';
 import LeftFooter from './Components/LeftFooter';
 import RightFooter from './Components/RightFooter';
 import Swipe from 'react-easy-swipe';
-import React,{useState} from 'react'
+import React,{useState} from 'react';
 
+import Posts from './Components/Posts';
+import Followers from './Components/Followers';
+import Following from './Components/Following';
 function App(){
   
   const [showRightFooter,setRightFooter]=useState(false)
@@ -60,15 +63,21 @@ function App(){
               {console.log("This is Desktop")}
               <div className='routing-page'>
                 <LeftFooter show={true}/>
-                <Routes>
-                    <Route path="/" element={<SignInAndSignUp/>}/>
-                    <Route path="/feed" element={<Feed/>}/>
-                    <Route path="/feed/:id" element={<FeedBody/>}/>
-                    <Route path="/notifications" element={<Notifications/>}/>
-                    <Route path="/profile" element={<Profile/>}/>
-                    <Route path="/networks" element={<Networks/>}/>
-                    <Route path="/logout" element={<Logout/>}/>
-                </Routes>
+               
+          <Routes>
+                <Route path="/" element={<SignInAndSignUp/>}/>
+                <Route path="/feed" element={<Feed/>}/>
+                <Route path="/feed/:id" element={<FeedBody/>}/>
+                <Route path="/notifications" element={<Notifications/>}/>
+                <Route path="/profile" element={<Profile/>}>
+                   <Route path="posts" element={<Posts/>}/> 
+                   <Route path="followers" element={<Followers/>}/>
+                   <Route path="Following" element={<Following/>}/>
+                </Route>
+
+                <Route path="/networks" element={<Networks/>}/>
+                <Route path="/logout" element={<Logout/>}/>
+          </Routes>
 
                 <RightFooter show={true}/>
               </div>
@@ -90,15 +99,20 @@ function App(){
             >
               {console.log("This is Phone")}
             <div className='routing-page'>
-              <Routes>
-                  <Route path="/" element={<SignInAndSignUp/>}/>
-                  <Route path="/feed" element={<Feed/>}/>
-                  <Route path="/feed/:id" element={<FeedBody/>}/>
-                  <Route path="/notifications" element={<Notifications/>}/>
-                  <Route path="/profile" element={<Profile/>}/>
-                  <Route path="/networks" element={<Networks/>}/>
-                  <Route path="/logout" element={<Logout/>}/>
-              </Routes>
+            <Routes>
+                <Route path="/" element={<SignInAndSignUp/>}/>
+                <Route path="/feed" element={<Feed/>}/>
+                <Route path="/feed/:id" element={<FeedBody/>}/>
+                <Route path="/notifications" element={<Notifications/>}/>
+                <Route path="/profile" element={<Profile/>}>
+                   <Route path="posts" element={<Posts/>}/> 
+                   <Route path="followers" element={<Followers/>}/>
+                   <Route path="Following" element={<Following/>}/>
+                </Route>
+
+                <Route path="/networks" element={<Networks/>}/>
+                <Route path="/logout" element={<Logout/>}/>
+          </Routes>
               
               <RightFooter show={showRightFooter}/>
             </div>
@@ -122,14 +136,19 @@ function App(){
             <div className='routing-page'>
               <LeftFooter show={true}/>
               <Routes>
-                  <Route path="/" element={<SignInAndSignUp/>}/>
-                  <Route path="/feed" element={<Feed/>}/>
-                  <Route path="/feed/:id" element={<FeedBody/>}/>
-                  <Route path="/notifications" element={<Notifications/>}/>
-                  <Route path="/profile" element={<Profile/>}/>
-                  <Route path="/networks" element={<Networks/>}/>
-                  <Route path="/logout" element={<Logout/>}/>
-              </Routes>
+                <Route path="/" element={<SignInAndSignUp/>}/>
+                <Route path="/feed" element={<Feed/>}/>
+                <Route path="/feed/:id" element={<FeedBody/>}/>
+                <Route path="/notifications" element={<Notifications/>}/>
+                <Route path="/profile" element={<Profile/>}>
+                   <Route path="posts" element={<Posts/>}/> 
+                   <Route path="followers" element={<Followers/>}/>
+                   <Route path="Following" element={<Following/>}/>
+                </Route>
+
+                <Route path="/networks" element={<Networks/>}/>
+                <Route path="/logout" element={<Logout/>}/>
+            </Routes>
               <RightFooter show={showRightFooter}/>
             </div>
             </Swipe>
