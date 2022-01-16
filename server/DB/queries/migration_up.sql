@@ -1,6 +1,3 @@
-
-
-
 CREATE TABLE IF NOT EXISTS user (
     user_id number PRIMARY KEY AUTO_INCREMENT,
     username varchar(10) UNIQUE NOT NULL,
