@@ -1,10 +1,9 @@
 CREATE TABLE IF NOT EXISTS user (
-    user_id number PRIMARY KEY AUTO_INCREMENT,
-    username varchar(10) UNIQUE NOT NULL,
-    password varchar(10) NOT NULL,
-    email varchar(20) UNIQUE NOT NULL,
-    index number DEFAULT 0,
-    registration_date date not null
+    user_id INT AUTO_INCREMENT,
+    username VARCHAR(10),
+    password VARCHAR(10),
+    email_id VARCHAR(15),
+    UNIQUE (user_id)
 );
 
 CREATE TABLE IF NOT EXISTS posts (
