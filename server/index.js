@@ -1,48 +1,67 @@
 const express=require('express')
-const mongoose=require('mongoose')
-const bcrypt=require('bcrypt')
 const jwt=require('jsonwebtoken')
-const userdetails=require('./models/userdetails')
-
-const jwt_secret='vsidohvWoei;&8%^uhrvewo..nji'
-
+const {GetAllUsers,CreateUser,GetUser} =require('./DB/DB.Tables/DAO-userdetails')
+const {GetAllPosts,CreatePost,GetPost} =require('./DB/DB.Tables/DAO-Posts')
+const {userRegister,userLogin,getRegisteredUsers}=require('./Controllers/userController')
+const config=require('./config')
 const app=express()
+
 app.use(express.json())
 
-mongoose.connect('mongodb+srv://22yards:rithvik123@22yards.nby6f.mongodb.net/mongofirst?retryWrites=true&w=majority')
+const SecretKey="nvr84t@90u4*&%>neuh"
+const {mysql_pool}=config
 
-console.log(userdetails)
+const createUserTableQuery=`CREATE TABLE IF NOT EXISTS userdetails (
+    username VARCHAR(10),
+    password VARCHAR(10),
+    email_id VARCHAR(15),
+    UNIQUE (username)
+);`
+const createPostTableQuery=`CREATE TABLE IF NOT EXISTS posts (
+    post_id INT AUTO_INCREMENT,
+    username VARCHAR(10),
+    content TEXT,
+    UNIQUE (post_id)
+);`
 
-app.post('/register',async (req,res)=>{
-    const record=req.body
-    const {emailid,username,password}=record
-    const hashpassword=await bcrypt.hash(password,5)
-    const response=await userdetails.create({emailid,username,password:hashpassword})
-    .then(()=>("registration successful"))
-    .catch(()=>("registration unsuccessful"))
-    res.send(response)
+mysql_pool.query(createUserTableQuery,(error,result,field)=>{
+    if(error) console.log(error);
 })
 
-app.post('/login',async (req,res)=>{
-    const record=req.body
-    const {username,password}=record
-    const response=await userdetails.findOne({username}).lean()
-    console.log(response)
-    if(response){
-        if(await bcrypt.compare(password,response.password)){
-            const token=jwt.sign({id:response._id,username},jwt_secret)
-            console.log(token)
-            res.send(JSON.stringify({status:'ok',token}))
-        }
-        else{
-            res.send("Password incorrect")
-        }
-    }
-    else{
-       res.send("invalid credentials")
-    }
+mysql_pool.query(createPostTableQuery,(error,result,field)=>{
+    if(error) console.log(error);
 })
 
-app.listen(1337,()=>{
-    console.log("Server is lisening to 1337")
+
+app.post('/register', userRegister)
+
+app.post('/login',userLogin)
+
+app.get('/register',getRegisteredUsers)
+
+app.post('/feed',async(req,res)=>{
+     const {token,content}=req.body
+     const {username,password}=jwt.verify(token,SecretKey)
+     try{
+        await CreatePost(username,content)
+        res.send("Post created successfully")
+     }
+     catch(err){
+        res.send("Post Creation failed")
+     }
+})
+
+app.get('/feed',async(req,res)=>{
+    const data=await GetAllPosts()
+    res.send(data)
+})
+
+app.get('/feed/:id',async(req,res)=>{
+    const {id}=req.params 
+})
+
+
+
+app.listen(1337,function(){
+    console.log("Iam running on port 1337");
 })

@@ -11,7 +11,6 @@ function Profile(){
           <Link className="profile-links" to="/Profile/posts">Posts</Link>{" "}
           <Link className="profile-links" to="/Profile/Followers">Followers</Link>
           <Link className="profile-links" to="/Profile/Following">Following</Link>
-          <Link className="profile-links" to="/Profile/Following">Following</Link>
           </Container>
           {/* <Posts /> */}
           <Outlet />
