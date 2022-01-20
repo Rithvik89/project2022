@@ -1,17 +1,17 @@
 const {CreateUser,GetUser,GetAllUsers}=require('../DB/DB.Tables/DAO-userdetails')
 
-async function userRegister (req,res){
+async function HandleUserRegister (req,res){
     const {username,password,email_id}=req.body
     try{
         await CreateUser(username,password,email_id)
-        res.send("Registered sucessfully")
+        res.send("Registered successfully")
     }
     catch(err){
         res.send("registration Failed")
     }
 }
 
-async function userLogin(req,res){
+async function HandleUserLogin(req,res){
     const {username,password}=req.body
     try{
        const data=await GetUser(username) 
@@ -28,9 +28,9 @@ async function userLogin(req,res){
     }
 }
 
-async function getRegisteredUsers(req,res){
+async function HandleGetUsers(req,res){
     const data=await GetAllUsers()
     res.send(data)
 }
 
-module.exports={userRegister,userLogin,getRegisteredUsers}
+module.exports={HandleGetUsers, HandleUserLogin, HandleUserRegister};
