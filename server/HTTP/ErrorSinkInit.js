@@ -1,11 +1,11 @@
-import { makeError, coatError } from "../Helpers/ErrorHandling/MakeError";
+const { makeError, coatError } = require("../Helpers/ErrorHandling/MakeError");
 
 function SinkErrorFor(app) {
-  app.srv.use((req, res, next) => {
+  app.use((req, res, next) => {
     next(new makeError.NotFound());
   });
 
-  app.srv.use((err, req, res, next) => {
+  app.use((err, req, res, next) => {
     err = coatError(err);
     res.status(err.status || 500);
     res.send({
