@@ -11,7 +11,9 @@ Content-Type: application/json
 }
 
 ###
-post http://localhost:1337/logincd 
+=======
+post http://localhost:1337/login
+>>>>>>> c86ceab8e0ecf6e12bbb7c87bee9b8b8379ecd3f
 Content-Type: application/json
 
 {
@@ -32,4 +34,6 @@ Content-Type: application/json
 get http://localhost:1337/feed
 
 ###
-get http://localhost:1337/feed/2
+=======
+post http://localhost:1337/like
+>>>>>>> c86ceab8e0ecf6e12bbb7c87bee9b8b8379ecd3f
