@@ -1,10 +1,10 @@
 const {QueryAll,Exec,Query} = require('./DB')
 
 const _query = {
-    Create: `INSERT INTO userdetails (username,password,email_id) VALUES (?,?,?) `,
-    GetAll: `SELECT * FROM userdetails`,
-    GetUser:`SELECT * FROM userdetails WHERE username=?`,
-    Delete: `DELETE FROM userdetails WHERE user_id=$1`,
+    Create: `INSERT INTO users (username,password,email_id) VALUES (?,?,?) `,
+    GetAll: `SELECT * FROM users`,
+    GetUser:`SELECT * FROM users WHERE username=?`,
+    Delete: `DELETE FROM users WHERE user_id=?`,
   };
 
 // defining my functions
@@ -22,5 +22,6 @@ function GetUser(username){
    return Query(_query.GetUser,[username])
 }
 
-module.exports={GetAllUsers,CreateUser,GetUser}
+function DeleteUser()
 
+module.exports={GetAllUsers,CreateUser,GetUser}
