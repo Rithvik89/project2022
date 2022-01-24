@@ -1,19 +1,33 @@
 const express=require('express')
 const jwt=require('jsonwebtoken')
-const {GetAllUsers,CreateUser,GetUser} =require('./DB/DB.Tables/DAO-userdetails')
-const {GetAllPosts,CreatePost,GetPost} =require('./DB/DB.Tables/DAO-Posts')
-const {userRegister,userLogin,getRegisteredUsers}=require('./Controllers/userController')
 const config=require('./config')
+const createTables=require('./DB/createTables')
 const { init } = require('express/lib/application')
 
 
-
-
-
 const ServerInit = require('./HTTP/ServerInit')
-const Conf = require('./HTTP/ConfigInit')
 const routeInit = require('./HTTP/RouteInit')
-const SinkErrorFor = require('./HTTP/ErrorSinkInit');   
+const SinkErrorFor = require('./HTTP/ErrorSinkInit');  
+
+
+
+// const conf = Conf
+const app = ServerInit();
+createTables();
+routeInit(app);
+SinkErrorFor(app);
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -26,26 +40,7 @@ const SinkErrorFor = require('./HTTP/ErrorSinkInit');
 // const SecretKey="nvr84t@90u4*&%>neuh"
 // const {mysql_pool}=config
 
-// const createUserTableQuery=`CREATE TABLE IF NOT EXISTS userdetails (
-//     username VARCHAR(10),
-//     password VARCHAR(10),
-//     email_id VARCHAR(15),
-//     UNIQUE (username)
-// );`
-// const createPostTableQuery=`CREATE TABLE IF NOT EXISTS posts (
-//     post_id INT AUTO_INCREMENT,
-//     username VARCHAR(10),
-//     content TEXT,
-//     UNIQUE (post_id)
-// );`
 
-// mysql_pool.query(createUserTableQuery,(error,result,field)=>{
-//     if(error) console.log(error);
-// })
-
-// mysql_pool.query(createPostTableQuery,(error,result,field)=>{
-//     if(error) console.log(error);
-// })
 
 
 // app.post('/register', userRegister)
@@ -80,8 +75,3 @@ const SinkErrorFor = require('./HTTP/ErrorSinkInit');
 // app.listen(1337,function(){
 //     console.log("Iam running on port 1337");
 // })
-
-const conf = Conf
-const app = ServerInit(conf);
-routeInit(app);
-SinkErrorFor(app);

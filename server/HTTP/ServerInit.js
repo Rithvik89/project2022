@@ -19,11 +19,11 @@ function ServerInit(conf) {
     app.use(express.urlencoded({extended : true}));
     app.use(cookieParser());
 
-    console.log(
-        conf.primaryInfo.isDevMode
-            ? "Configured in Dev Mode"
-            : "Configure in Production Mode"
-    );
+    // console.log(
+    //     conf.primaryInfo.isDevMode
+    //         ? "Configured in Dev Mode"
+    //         : "Configure in Production Mode"
+    // );
 
     return app;
 }

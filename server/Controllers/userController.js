@@ -8,7 +8,7 @@ async function HandleUserRegister(req, res) {
   const { username, password, email_id } = req.body;
 
   GetUser(username)
-    .then((result) => {
+    .then(async (result) => {
       if (result == []) {
         try {
           await CreateUser(username, password, email_id);
