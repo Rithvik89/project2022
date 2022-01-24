@@ -1,9 +1,9 @@
-const config = require("../../config");
+const config = require("../../HTTP/config");
 
 const { mysql_pool } = config;
 
 function Exec(create_query, arg) {
-  console.log(create_query, arg);
+  // console.log(create_query, arg);
   return new Promise((resolve, reject) => {
     mysql_pool.query(create_query, arg, (error, result, field) => {
       if (error) reject(error);

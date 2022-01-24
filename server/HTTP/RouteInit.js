@@ -1,11 +1,9 @@
-const { HandleUserLogin, HandleUserRegister } = require("../Controllers/userController");
-
+const authRouter = require("../Routes/authRoute");
 
 
 function routeInit(app)
 {
-    app.use('/login', HandleUserLogin);
-    app.use('/register', HandleUserRegister);
+    app.use('/auth', authRouter)
 }
 
 module.exports = routeInit;
