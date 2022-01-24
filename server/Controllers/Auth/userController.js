@@ -38,9 +38,20 @@ async function HandleUserLogin(req, res) {
     })
 }
 
+async function HandleUserLogout(req, res) {
+  checkIfAlreadyLogin(req.cookies.__RT__)
+    .then((userData) => {
+      res.json(userData);
+    })
+    .catch((err) => {
+      
+    })
+}
+
+
 async function HandleGetUsers(req, res) {
   const data = await GetAllUsers();
   res.send(data);
 }
 
-module.exports = { HandleGetUsers, HandleUserLogin, HandleUserRegister };
+module.exports = { HandleGetUsers, HandleUserLogin, HandleUserRegister , HandleUserLogout};

@@ -28,39 +28,40 @@ function checkIfAlreadyLogin(refreshToken) {
 }
 
 async function performLogin(username, password) {
-    GetUser(username)
-      .then((data) => {
-        if (data !== [] && password === data[0].password) {
-          try {
-            const tokens = await signAllTokens(data);
+  GetUser(username)
+    .then((data) => {
+      if (data !== [] && password === data[0].password) {
+        try {
+          const tokens = await signAllTokens(data);
 
-            res.cookie('__AT__', tokens.accessToken, {
-              maxAge: AT_DURATION,
-              httpOnly: true,
-              sameSite: 'strict'
-            })
-            res.cookie('__RT__', tokens.refreshToken, {
-              maxAge: RT_DURATION,
-              httpOnly: true,
-              sameSite: 'strict'
-            })
-            
-            resolve(data);
-          } catch (err) {
-            reject (err);
-          }
-        } else {
+          res.cookie('__AT__', tokens.accessToken, {
+            maxAge: AT_DURATION,
+            httpOnly: true,
+            sameSite: 'strict'
+          })
+          res.cookie('__RT__', tokens.refreshToken, {
+            maxAge: RT_DURATION,
+            httpOnly: true,
+            sameSite: 'strict'
+          })
 
+          resolve(data);
+        } catch (err) {
+          reject(err);
         }
-      })
-      .catch((err) => {
-        next(err);
-      })
+      } else {
 
-    function performLogout() {}
+      }
+    })
+    .catch((err) => {
+      next(err);
+    })
+}
 
-    module.exports = {
-      checkIfAlreadyLogin,
-      performLogin,
-      performLogout
-    };
+function performLogout() {}
+
+module.exports = {
+  checkIfAlreadyLogin,
+  performLogin,
+  performLogout
+};

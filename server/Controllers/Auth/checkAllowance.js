@@ -1,0 +1,4 @@
+
+function checkAllowance (req, res) {
+
+}
