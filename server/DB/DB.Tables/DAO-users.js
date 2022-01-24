@@ -22,6 +22,8 @@ function GetUser(username){
    return Query(_query.GetUser,[username])
 }
 
-function DeleteUser()
+function DeleteUser() {
+    
+}
 
 module.exports={GetAllUsers,CreateUser,GetUser}
