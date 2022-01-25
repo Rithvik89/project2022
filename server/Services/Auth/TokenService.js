@@ -1,18 +1,30 @@
-const { signAccessToken, signRefreshToken } = require("../../Helpers/Auth/jwtTokenFactory");
+const {
+    signAccessToken,
+    signRefreshToken
+} = require("../../Helpers/Auth/jwtTokenFactory");
 
 
-async function signAllTokens (userData) {
-    try {
-        var accessToken = await signAccessToken(userData);
-        var refreshToken = await signRefreshToken(userData);
-        return {accessToken, refreshToken};
-    } catch (err) {
-        throw err;
-    }
+async function signAllTokens(userData) {
+    return new Promise((resolve, reject) => {
+        try {
+            var accessToken = await signAccessToken(userData);
+            var refreshToken = await signRefreshToken(userData);
+            resolve({
+                accessToken,
+                refreshToken
+            });
+        } catch (err) {
+            reject(err);
+        }
+    })
+
 }
 
-function authorizeRequest () {
+function authorizeRequest() {
 
 }
 
-module.exports = {signAllTokens, authorizeRequest};
+module.exports = {
+    signAllTokens,
+    authorizeRequest
+};

@@ -3,7 +3,7 @@ const {
   GetUser,
   GetAllUsers,
 } = require("../../DB/DB.Tables/DAO-users");
-const { checkIfAlreadyLogin } = require("../../Services/Auth/LoginService");
+const { checkIfLogin, performLogin, performLogout } = require("../../Services/Auth/LoginService");
 
 async function HandleUserRegister(req, res) {
   const { username, password, email_id } = req.body;
@@ -29,22 +29,32 @@ async function HandleUserRegister(req, res) {
 }
 
 async function HandleUserLogin(req, res) {
-  checkIfAlreadyLogin(req.cookies.__RT__)
+  checkIfLogin(req.cookies.__RT__)
     .then((userData) => {
       res.json(userData);
     })
     .catch((err) => {
-      
+      performLogin(req.body.username, req.body.username) 
+        .then( (userData) => {
+          res.status(200).json(userData);
+        })
+        .catch((err_) => {
+          next(err_);
+        })
     })
 }
 
 async function HandleUserLogout(req, res) {
-  checkIfAlreadyLogin(req.cookies.__RT__)
+  res.clearCookie('__AT__');
+  res.clearCookie('__RT__');
+  checkIfLogin(req.cookies.__RT__)
     .then((userData) => {
-      res.json(userData);
+      performLogout(req.cookies.__RT__);  
+        .then()
+        .catch()
     })
     .catch((err) => {
-      
+      next(new Error("Already logged out, cannot log out again"));
     })
 }
 
