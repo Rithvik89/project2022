@@ -9,8 +9,11 @@ const {
   AT_DURATION,
   RT_DURATION
 } = require('../../Helpers/Auth/jwtTokenFactory');
+const {GetUser} = require('../../DB/DB.Tables/DAO-users');
+const res = require("express/lib/response");
 
-function checkIfAlreadyLogin(refreshToken) {
+
+function checkIfLogin(refreshToken) {
   return new Promise(async (reject, resolve) => {
     verifyRefreshToken(refreshToken)
       .then((payload) => {
@@ -22,46 +25,71 @@ function checkIfAlreadyLogin(refreshToken) {
         }
       })
       .catch((err) => {
-        throw err;
+        reject(err);
       });
   });
 }
 
-async function performLogin(username, password) {
-  GetUser(username)
-    .then((data) => {
-      if (data !== [] && password === data[0].password) {
-        try {
-          const tokens = await signAllTokens(data);
 
-          res.cookie('__AT__', tokens.accessToken, {
-            maxAge: AT_DURATION,
-            httpOnly: true,
-            sameSite: 'strict'
-          })
-          res.cookie('__RT__', tokens.refreshToken, {
-            maxAge: RT_DURATION,
-            httpOnly: true,
-            sameSite: 'strict'
-          })
+//if login is successful it sets the cookie and resolves the payload(user data) else rejects the error
+function performLogin(username, password) {
+  return new Promise((resolve, reject) => {
+    GetUser(username)
+      .then(async (data) => {
+        if (data !== [] && password === data[0].password) {
+          try {
+            const tokens = await signAllTokens(data);
 
-          resolve(data);
-        } catch (err) {
-          reject(err);
+            res.cookie('__AT__', tokens.accessToken, {
+              maxAge: AT_DURATION,
+              httpOnly: true,
+              sameSite: 'strict'
+            })
+            res.cookie('__RT__', tokens.refreshToken, {
+              maxAge: RT_DURATION,
+              httpOnly: true,
+              sameSite: 'strict'
+            })
+
+            resolve(data);
+
+          } catch (err) {
+            reject(err);
+          }
+        } else {
+          reject(new Error('Invalid Credentials'));
         }
-      } else {
+      })
+      .catch((err) => {
+        reject(err);
+      })
+  })
 
-      }
-    })
-    .catch((err) => {
-      next(err);
-    })
 }
 
-function performLogout() {}
+//add the refresh token to redis
+function performLogout(refreshToken) {
+  return new Promise((resolve, reject) => {
+    let expirationTimeInSeconds = new Date(0);
+
+    expirationTimeInSeconds.setSeconds(userData.exp);
+
+    expirationTimeInSeconds = Math.ceil(
+      (expirationTimeInSeconds - new Date()) / 1000 + 60
+    );
+
+    inMemSet(refreshToken, true, expirationTimeInSeconds)
+      .then((reply) => {
+        return resolve();
+      })
+      .catch((err) => {
+        return reject(makeError.InternalServerError());
+      });
+  });
+}
 
 module.exports = {
-  checkIfAlreadyLogin,
+  checkIfLogin,
   performLogin,
   performLogout
 };
