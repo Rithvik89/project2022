@@ -3,7 +3,7 @@ const xss = require('xss-clean');
 const cookieParser = require('cookie-parser');
 
 
-function ServerInit(conf) {
+function ServerInit() {
     const app = express();
 
     app.use(xss());
@@ -18,12 +18,6 @@ function ServerInit(conf) {
     app.use(express.json());
     app.use(express.urlencoded({extended : true}));
     app.use(cookieParser());
-
-    // console.log(
-    //     conf.primaryInfo.isDevMode
-    //         ? "Configured in Dev Mode"
-    //         : "Configure in Production Mode"
-    // );
 
     return app;
 }

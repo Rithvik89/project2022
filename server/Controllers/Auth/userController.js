@@ -9,13 +9,8 @@ async function HandleUserRegister(req, res) {
   const { username, password, email_id } = req.body;
 
   GetUser(username)
-<<<<<<< HEAD:server/Controllers/userController.js
     .then(async (result) => {
       if (result == []) {
-=======
-    .then((result) => {
-      if (result === []) {
->>>>>>> f1266de1582947d10061a069a15ddceaaf737451:server/Controllers/Auth/userController.js
         try {
           await CreateUser(username, password, email_id);
           res.send("Registered successfully");
