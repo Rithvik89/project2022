@@ -9,8 +9,8 @@ async function HandleUserRegister(req, res) {
   const { username, password, email_id } = req.body;
 
   GetUser(username)
-    .then((result) => {
-      if (result === []) {
+    .then(async(result) => {
+        if (result === []) {
         try {
           await CreateUser(username, password, email_id);
           res.send("Registered successfully");
@@ -50,8 +50,6 @@ async function HandleUserLogout(req, res) {
   checkIfLogin(req.cookies.__RT__)
     .then((userData) => {
       performLogout(req.cookies.__RT__);  
-        .then()
-        .catch()
     })
     .catch((err) => {
       next(new Error("Already logged out, cannot log out again"));

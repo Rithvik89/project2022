@@ -7,5 +7,5 @@ authRouter.get('/login', );
 authRouter.post('/register', HandleUserLogin);
 authRouter.post('/login', HandleUserRegister);
 authRouter.post('/logout', HandleUserLogout);
-
+authRouter.get('/',(req,res)=>(res.send("hi")));
 module.exports = authRouter;

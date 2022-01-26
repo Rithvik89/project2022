@@ -16,7 +16,7 @@ const res = require("express/lib/response");
 function checkIfLogin(refreshToken) {
   return new Promise(async (reject, resolve) => {
     verifyRefreshToken(refreshToken)
-      .then((payload) => {
+      .then(async(payload) => {
         const isBlacklisted = await KVGet(refreshToken);
         if (isBlacklisted) {
           reject();

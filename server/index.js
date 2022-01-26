@@ -1,9 +1,9 @@
 const express=require('express')
 const jwt=require('jsonwebtoken')
-const {GetAllUsers,CreateUser,GetUser} =require('./DB/DB.Tables/DAO-userdetails')
+const {GetAllUsers,CreateUser,GetUser} =require('./DB/DB.Tables/DAO-users')
 const {GetAllPosts,CreatePost,GetPost} =require('./DB/DB.Tables/DAO-Posts')
-const {userRegister,userLogin,getRegisteredUsers}=require('./Controllers/userController')
-const config=require('./config')
+const {userRegister,userLogin,getRegisteredUsers}=require('./Controllers/Auth/userController')
+const config=require('./HTTP/config')
 const { init } = require('express/lib/application')
 
 
@@ -85,3 +85,6 @@ const conf = Conf
 const app = ServerInit(conf);
 routeInit(app);
 SinkErrorFor(app);
+app.listen(3000,()=>{
+    console.log("running on port 3000");
+});

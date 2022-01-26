@@ -21,8 +21,16 @@ redisClient.on("end", () => {
   console.log("Redis disconnected");
 });
 
-process.on("SIGINT", () => {
-  redisClient.quit();
+process.on("SIGINT", async () => {
+  try{
+    await redisClient.quit();
+  }
+  catch(err){
+    console.log(err);
+  }
+  finally{
+    process.exit();
+  }
 });
 
 module.exports = redisClient;

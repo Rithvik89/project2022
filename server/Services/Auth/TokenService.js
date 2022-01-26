@@ -5,7 +5,7 @@ const {
 
 
 async function signAllTokens(userData) {
-    return new Promise((resolve, reject) => {
+    return new Promise(async(resolve, reject) => {
         try {
             var accessToken = await signAccessToken(userData);
             var refreshToken = await signRefreshToken(userData);
