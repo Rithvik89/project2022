@@ -49,7 +49,7 @@ async function HandleUserLogout(req, res) {
   res.clearCookie('__RT__');
   checkIfLogin(req.cookies.__RT__)
     .then((userData) => {
-      performLogout(req.cookies.__RT__);  
+      performLogout(req.cookies.__RT__, req.userData)
         .then()
         .catch()
     })

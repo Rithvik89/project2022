@@ -68,14 +68,14 @@ function performLogin(username, password) {
 }
 
 //add the refresh token to redis
-function performLogout(refreshToken) {
+function performLogout(refreshToken, userData) {
   return new Promise((resolve, reject) => {
     let expirationTimeInSeconds = new Date(0);
 
     expirationTimeInSeconds.setSeconds(userData.exp);
 
     expirationTimeInSeconds = Math.ceil(
-      (expirationTimeInSeconds - new Date()) / 1000 + 60
+      (expirationTimeInSeconds - Date.now()) / 1000 + 60
     );
 
     inMemSet(refreshToken, true, expirationTimeInSeconds)
