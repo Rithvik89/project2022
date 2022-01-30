@@ -13,6 +13,7 @@ Content-Type: application/json
 ###
 post http://localhost:1337/login
 Content-Type: application/json
+Cookie: __AT__=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDMyNjAyMjMsImV4cCI6MTY0MzI2MDgyMywiaXNzIjoiMjJ5YXJkcyJ9.yCgmfmcsVFVIUbApYstACELc_zMR-5QegUUy5d7uprA; Max-Age=0; Path=/; Expires=Thu, 27 Jan 2022 05:10:23 GMT; HttpOnly; SameSite=Strict,__RT__=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDMyNjAyMjMsImV4cCI6MTY0MzM0NjYyMywiaXNzIjoiMjJ5YXJkcyJ9.5DHtQTvlqF1A1N0-WBOxwUuTv94jMh05LS1CjV5mzeo; Max-Age=86; Path=/; Expires=Thu, 27 Jan 2022 05:11:49 GMT; HttpOnly; SameSite=Strict
 
 {
     "username":"rithvik",
