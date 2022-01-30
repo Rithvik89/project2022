@@ -15,8 +15,8 @@ post http://localhost:1337/login
 Content-Type: application/json
 
 {
-    "username":"rithvik",
-    "password":"rithvik123"
+    "username":"sunny",
+    "password":"sunny123"
 }
 
 ###

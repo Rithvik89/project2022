@@ -6,7 +6,6 @@ const { checkIfLogin, performLogin,performLogout} = require("../../Services/Auth
 
 async function HandleUserRegister(req, res,next) {
   const { username, password, email_id } = req.body;
-   console.log("cookie's for new regoster account",req.cookies)
   GetUser(username)
     .then(async (result) => {
       if (result.length===0) {
@@ -37,10 +36,8 @@ function HandleUserLogin(req,res,next) {
         .then( (userData) => {
           res.status(200).json(userData);
         })
-        .catch((err_) => {
-          console.log(err_)
-          err_.code=404
-          next(err_);
+        .catch((err) => {
+          next(err);
         })
     })
 }
@@ -59,7 +56,7 @@ async function HandleUserLogout(req, res, next) {
         )
     })
     .catch((err) => {
-      next(new Error("Already logged out, cannot log out again"));
+      next(err);
     })
 }
 

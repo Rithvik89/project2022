@@ -14,7 +14,10 @@ const RT_DURATION = {
 function createToken(payload, secret , options ) {
     return new Promise((resolve, reject) => {
         jwt.sign(payload, secret, options, (err, token) => {
-            if(err) reject(err);
+            if(err){
+                err.srvMessage = "Error in token creation";
+                reject(err);
+            }
             resolve(token);
         })
     })
@@ -57,8 +60,15 @@ function signRefreshToken ( userData ) {
 function verifyAccessToken(token) {
     return new Promise((resolve, reject) => {
         jwt.verify(token, process.env.AT_SECRET_KEY, (err, payload) => {
+            console.log("This is access token");
             console.log(payload)
-            if(err) reject(err);
+            console.log(err);
+            if(err) {
+                console.log("some error in verifying token")
+                err.code = 404;
+                err.srvMessage = "Access Token Not Valid";
+                reject(err);
+            }
             resolve(payload);
         })
     })
@@ -70,7 +80,11 @@ function verifyRefreshToken(token) {
     return new Promise((resolve, reject) => {
         jwt.verify(token, process.env.RT_SECRET_KEY, (err, payload) => {
             console.log(payload)
-            if(err) reject(err);
+            if(err) {
+                err.code = 404;
+                err.srvMessage = "Refresh Token Not Valid";
+                reject(err);
+            }
             resolve(payload);
         })
     })
