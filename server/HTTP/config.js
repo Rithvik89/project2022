@@ -1,13 +1,14 @@
 const mysql=require('mysql2')
+const conf=require('./ConfigInit')
 
 const config={
     mysql_pool:mysql.createPool(
         {
-            host:"localhost",
-            port:3306,
-            user:"root",
-            password:"nitwarangal@3",
-            database:'22yards'
+            host:conf.connectivity.mySqlHost,
+            port:conf.connectivity.mySqlPort,
+            user:conf.connectivity.mySqlUser,
+            password:conf.connectivity.mySqlPassword,
+            database:conf.connectivity.mySqlDB
         }
     )   
 }

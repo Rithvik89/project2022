@@ -15,15 +15,37 @@ function createTables(req,res){
         content TEXT,
         primary key (post_id)
     );`
+    const createConnectionTableQuery=`CREATE TABLE IF NOT EXISTS connections(
+        connect_id INT AUTO_INCREMENT,
+        follower_name VARCHAR(15),
+        following_name VARCHAR(15),
+        primary key (connect_id)
+    );`
+    const createPendingConnectionTableQuery=`CREATE TABLE IF NOT EXISTS pendingConnections(
+        pending_connect_id INT AUTO_INCREMENT,
+        follower_name VARCHAR(15),
+        following_name VARCHAR(15),
+        primary key (pending_connect_id)
+    );`
     
     mysql_pool.query(createUserTableQuery,(error,result,field)=>{
         if(error) console.log(error);
-        console.log("users table created")
+        // console.log("users table created")
     })
     
     mysql_pool.query(createPostTableQuery,(error,result,field)=>{
         if(error) console.log(error);
-        console.log("posts table created")
+        // console.log("posts table created")
+    })
+
+    mysql_pool.query(createConnectionTableQuery,(error,result,field)=>{
+        if(error) console.log(error);
+        // console.log("users table created")
+    })
+    
+    mysql_pool.query(createPendingConnectionTableQuery,(error,result,field)=>{
+        if(error) console.log(error);
+        // console.log("posts table created")
     })
 }
 

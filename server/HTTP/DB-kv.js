@@ -1,27 +1,16 @@
 const redis = require("redis");
+const conf=require('./ConfigInit');
+const client=redis.createClient({
+  host:"localhost",
+  port:6379
+})
 
-const redisClient = redis.createClient({
-  url:"redis-19007.c11.us-east-1-3.ec2.cloud.redislabs.com:19007"
-});
+async function createConnection(){
+  
+  await client.connect()
+  
+}
 
-redisClient.on("connect", () => {
-  console.log("Connected To Redis");
-});
+createConnection();
 
-redisClient.on("error", (err) => {
-  console.log(err.message);
-});
-
-redisClient.on("ready", () => {
-  console.log("Redis ready to use");
-});
-
-redisClient.on("end", () => {
-  console.log("Redis disconnected");
-});
-
-process.on("SIGINT", () => {
-  redisClient.quit();
-});
-
-module.exports = redisClient;
+module.exports =client;

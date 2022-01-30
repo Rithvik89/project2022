@@ -3,14 +3,19 @@ const {
     verifyRefreshToken
 } = require("../../Helpers/Auth/jwtTokenFactory");
 
-function checkAllowance(req, res) {
-    verifyAccessToken(req.cookie.__AT__)
+function checkAllowance(req, res,next) {
+    console.log("Iam here")
+    verifyAccessToken(req.cookies.__AT__)
         .then((data) => {
+            req.credentials=data
+            console.log("iam here also")
             next();
         })
         .catch((err) => {
-            verifyRefreshToken(req.cookie.__RT__)
-                .then((data) => {
+            console.log(req.cookies.__RT__)
+            verifyRefreshToken(req.cookies.__RT__)
+                .then(async (data) => {
+                    console.log("IN try")
                     const tokens = await signAllTokens(data);
 
                     res.cookie('__AT__', tokens.accessToken, {
@@ -23,14 +28,14 @@ function checkAllowance(req, res) {
                         httpOnly: true,
                         sameSite: 'strict'
                     })
-
-                    
-
                     next();
                 })
                 .catch((err) => {
-                    res.clearCookie(__AT__);
-                    res.clearCookie(__RT__);
+                    res.clearCookie('__AT__');
+                    res.clearCookie('__RT__');
+                    res.send('login First')
                 })
         })
 }
+
+module.exports = checkAllowance
