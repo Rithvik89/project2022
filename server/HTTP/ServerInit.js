@@ -30,6 +30,12 @@ function ServerInit(conf) {
         console.log(`Server is listening on Port ${conf.primaryInfo.serverPort}`)
     })
 
+    app.use('/', (req, res, next)=>{
+        console.log(req.method);
+        console.log(req.url);
+        next();
+    })
+
     return app;
 }
 
