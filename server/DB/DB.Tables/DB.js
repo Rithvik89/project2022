@@ -3,7 +3,6 @@ const config = require("../../HTTP/config");
 const { mysql_pool } = config;
 
 function Exec(create_query, arg) {
-  // console.log(create_query, arg);
   return new Promise((resolve, reject) => {
     mysql_pool.query(create_query, arg, (error, result, field) => {
       if (error) reject(error);
@@ -12,13 +11,15 @@ function Exec(create_query, arg) {
   });
 }
 
-function QueryAll(get_all_query) {
+function QueryAll(get_all_query,arg) {
   return new Promise(async (resolve, reject) => {
     try {
-      mysql_pool.query(get_all_query, (error, result, field) => {
+      mysql_pool.query(get_all_query,arg, (error, result, field) => {
+        console.log(result)
         resolve(result);
       });
     } catch (err) {
+      console.log("Hello in err")
       reject(err);
     }
   });

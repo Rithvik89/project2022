@@ -1,13 +1,14 @@
 const mysql=require('mysql2')
+const conf=require('./ConfigInit')
 
 const config={
     mysql_pool:mysql.createPool(
         {
-            host:"mysql-66575-0.cloudclusters.net",
-            port:10738,
-            user:"admin",
-            password:"SvMsKRpl",
-            database:'22yards'
+            host:conf.connectivity.mySqlHost,
+            port:conf.connectivity.mySqlPort,
+            user:conf.connectivity.mySqlUser,
+            password:conf.connectivity.mySqlPassword,
+            database:conf.connectivity.mySqlDB
         }
     )   
 }

@@ -6,6 +6,7 @@ const {
     performLogout
 } = require("../../Services/Auth/LoginService");
 
+
 function checkAllowance(req, res, next) {
     verifyAccessToken(req.cookie.__AT__)
         .then((data) => {
@@ -19,8 +20,10 @@ function checkAllowance(req, res, next) {
                 })
         })
         .catch((err) => {
-            verifyRefreshToken(req.cookie.__RT__)
-                .then((data) => {
+            console.log(req.cookies.__RT__)
+            verifyRefreshToken(req.cookies.__RT__)
+                .then(async (data) => {
+                    console.log("IN try")
                     const tokens = await signAllTokens(data);
                     performLogout(req.cookies.__RT__, data);
                     res.cookie("__AT__", tokens.accessToken, {
@@ -31,19 +34,16 @@ function checkAllowance(req, res, next) {
                     res.cookie("__RT__", tokens.refreshToken, {
                         maxAge: RT_DURATION,
                         httpOnly: true,
-                        sameSite: "strict",
-                    });
-                    req.userData = data;
+                        sameSite: 'strict'
+                    })
                     next();
                 })
                 .catch((err) => {
-                    res.clearCookie(__AT__);
-                    res.clearCookie(__RT__);
-                    next(err);
-                });
-        });
+                    res.clearCookie('__AT__');
+                    res.clearCookie('__RT__');
+                    res.send('login First')
+                })
+        })
 }
 
-module.exports = {
-    checkAllowance
-};
+module.exports = checkAllowance

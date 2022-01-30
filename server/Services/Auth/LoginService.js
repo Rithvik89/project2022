@@ -1,7 +1,7 @@
 const {
-  KVGet
+  KVSet,KVGet
 } = require("../../DB/KVStore");
-const verifyRefreshToken = require("./../../Helpers/Auth/jwtTokenFactory");
+const {verifyRefreshToken} = require("./../../Helpers/Auth/jwtTokenFactory");
 const {
   signAllTokens
 } = require("./TokenService");
@@ -10,18 +10,18 @@ const {
   RT_DURATION
 } = require('../../Helpers/Auth/jwtTokenFactory');
 const {GetUser} = require('../../DB/DB.Tables/DAO-users');
-const res = require("express/lib/response");
 
 
 function checkIfLogin(refreshToken) {
-  return new Promise(async (reject, resolve) => {
+  return new Promise((resolve, reject) => {
     verifyRefreshToken(refreshToken)
-      .then((payload) => {
+      .then(async (payload) => {
         const isBlacklisted = await KVGet(refreshToken);
-        if (isBlacklisted) {
-          reject();
-        } else {
-          resolve(payload);
+        if(!isBlacklisted){
+          resolve(payload)
+        }
+        else{
+          reject()
         }
       })
       .catch((err) => {
@@ -32,21 +32,20 @@ function checkIfLogin(refreshToken) {
 
 
 //if login is successful it sets the cookie and resolves the payload(user data) else rejects the error
-function performLogin(username, password) {
+function performLogin(res,username, password) {
   return new Promise((resolve, reject) => {
     GetUser(username)
       .then(async (data) => {
         if (data !== [] && password === data[0].password) {
           try {
             const tokens = await signAllTokens(data);
-
             res.cookie('__AT__', tokens.accessToken, {
-              maxAge: AT_DURATION,
+              maxAge: AT_DURATION.secformat,
               httpOnly: true,
               sameSite: 'strict'
             })
             res.cookie('__RT__', tokens.refreshToken, {
-              maxAge: RT_DURATION,
+              maxAge: RT_DURATION.secformat,
               httpOnly: true,
               sameSite: 'strict'
             })
@@ -78,12 +77,13 @@ function performLogout(refreshToken, userData) {
       (expirationTimeInSeconds - Date.now()) / 1000 + 60
     );
 
-    inMemSet(refreshToken, true, expirationTimeInSeconds)
+    KVSet(refreshToken, 1, expirationTimeInSeconds)
       .then((reply) => {
-        return resolve();
+         resolve();
       })
       .catch((err) => {
-        return reject(makeError.InternalServerError());
+        console.log("server err")
+        reject(err);
       });
   });
 }

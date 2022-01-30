@@ -30,12 +30,12 @@ const Conf = {
   },
   connectivity: {
     redisPort: getConf("REDIS_PORT")?.getNumber() || 6379,
-    redisUri: getConf("REDIS_URI")?.getString() || "redis",
-    postgresHost: getConf("MYSQL_HOST")?.getString() || "localhost",
-    postgresPort: getConf("MYSQL_PORT")?.getNumber() || 3306,
-    postgresUser: getConf("MYSQL_USER")?.getString() || "parthiv",
-    postgresDB: getConf("MYSQL_DB")?.getString() || "parthiv",
-    postgresPassword: getConf("MYSQL_PASSWORD")?.getString() || "parthiv",
+    redisHost: getConf("REDIS_HOST")?.getString() || "localhost",
+    mySqlHost: getConf("MYSQL_HOST")?.getString() || "localhost",
+    mySqlPort: getConf("MYSQL_PORT")?.getNumber() || 3306,
+    mySqlUser: getConf("MYSQL_USER")?.getString() || "parthiv",
+    mySqlDB: getConf("MYSQL_DB")?.getString() || "parthiv",
+    mySqlPassword: getConf("MYSQL_PASSWORD")?.getString() || "parthiv",
   },
 };
 

@@ -1,6 +1,7 @@
 const express = require('express');
 const xss = require('xss-clean');
 const cookieParser = require('cookie-parser');
+const bodyParser=require('body-parser')
 
 
 function ServerInit(conf) {
@@ -24,6 +25,10 @@ function ServerInit(conf) {
             ? "Configured in Dev Mode"
             : "Configure in Production Mode"
     );
+    
+    app.listen(conf.primaryInfo.serverPort,()=>{
+        console.log(`Server is listening on Port ${conf.primaryInfo.serverPort}`)
+    })
 
     return app;
 }
