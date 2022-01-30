@@ -3,16 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
 import EachNetworkCard from './components/EachNetwokCard/EachNetworkCard';
 
-const footerLeftRight=[
-  {
-    Title:"Card Title",
-    Text:`Some quick example text to build on the card title and make up the bulk of
-          the card's content.`,
-    Button:"Go SomeWhere"
-
-  }
-]
-
 const footerMid=[
   {
     Title:"Card Title",

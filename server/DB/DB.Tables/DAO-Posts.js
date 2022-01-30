@@ -4,7 +4,7 @@ const _query={
     Create: `INSERT INTO posts (username,content) VALUES (?,?) `,
     GetAll: `SELECT * FROM posts`,
     GetPost:`SELECT * FROM posts WHERE post_id=?`,
-    Delete: `DELETE FROM posts WHERE post_id=$1`,
+    Delete: `DELETE FROM posts WHERE post_id=?`,
 }
 
 // defining functions 
@@ -17,11 +17,15 @@ function GetAllPosts(){
     return QueryAll(_query.GetAll)     
 }
 
-function GetPost(post_id){
-   return Query(_query.GetUser,[post_id])
+function GetThisPost(post_id){
+   return Query(_query.GetPost,[post_id])
 }
 
-module.exports={GetAllPosts,CreatePost,GetPost}
+function DeletePost(post_id){
+   return Exec(_query.Delete,[post_id])
+ }
+
+module.exports={GetAllPosts,CreatePost,GetThisPost,DeletePost}
 
 
 

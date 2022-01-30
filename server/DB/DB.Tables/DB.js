@@ -1,41 +1,48 @@
-const config=require('../../config')
+const config = require("../../HTTP/config");
 
-const {mysql_pool}=config
+const { mysql_pool } = config;
 
-function Exec(create_query,arg){
-    console.log(create_query,arg)
-   return new Promise((resolve,reject)=>{
-        mysql_pool.query(create_query,arg,(error,result,field)=>{
-            if(error) reject(error);
-            resolve(result);
-        })
-   })
+function Exec(create_query, arg) {
+  return new Promise((resolve, reject) => {
+    mysql_pool.query(create_query, arg, (error, result, field) => {
+      if (error) {
+        var err = new Error('internal server error');
+        err.srvMessage = error.sqlMessage;
+        err.code = 500;
+        reject(err);
+      }
+      resolve(result);
+    });
+  });
 }
 
-function QueryAll (get_all_query){
-     return new Promise(async (resolve,reject)=>{
-         try{
-            mysql_pool.query(get_all_query,(error,result,field)=>{
-                resolve(result)
-           })
-         }
-         catch(err){
-             reject(err)
-         }
-     })
-}
-
-function Query(get_query,arg){
-    return new Promise(async (resolve,reject)=>{
-        try{
-           mysql_pool.query(get_query,arg,(error,result,field)=>{
-               resolve(result)
-           })
+function QueryAll(get_all_query,arg) {
+  return new Promise(async (resolve, reject) => {
+      mysql_pool.query(get_all_query,arg, (error, result, field) => {
+        if (error) {
+          var err = new Error('internal server error');
+          err.srvMessage = error.sqlMessage;
+          err.code = 500;
+          reject(err);
         }
-        catch(err){
-            reject(err)
-        }
-    })
+        resolve(result);
+      });
+  });
 }
 
-module.exports={QueryAll,Exec,Query}
+function Query(get_query, arg) {
+  return new Promise(async (resolve, reject) => {
+      mysql_pool.query(get_query, arg, (error, result, field) => {
+        if (error) {
+          var err = new Error('internal server error');
+          err.srvMessage = error.sqlMessage;
+          err.code = 500;
+          reject(err);
+        }
+        // console.log(result);
+        resolve(result[0]);
+      });
+  });
+}
+
+module.exports = { QueryAll, Exec, Query };

@@ -1,5 +1,17 @@
-
-@media (max-width:649px){
+.network-mid-section{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-top: 10px;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-left: 10px;
+    margin-right:10px;
+    height:calc(100vh - 69px);
+    overflow-y:scroll;
+}
+/* @media (max-width:649px){
    .network-mid-section{
     display: flex;
     justify-content: space-around;
@@ -46,7 +58,7 @@
         overflow-y: scroll;
     }
  }
-
+ */
 
 .network-mid-section::-webkit-scrollbar {
     display: none;

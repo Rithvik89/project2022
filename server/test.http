@@ -5,9 +5,9 @@ post http://localhost:1337/register
 Content-Type: application/json
 
 {
-    "username": "harsha",
-    "password": "harsha123",
-    "email_id": "harshamakham"
+    "username": "sunny",
+    "password": "sunny123",
+    "email_id": "sunny..."
 }
 
 ###
@@ -15,16 +15,18 @@ post http://localhost:1337/login
 Content-Type: application/json
 
 {
-    "username":"parthiv",
-    "password":"parthiv123"
+    "username":"sunny",
+    "password":"sunny123"
 }
+
+###
+get http://localhost:1337/logout
 
 ###
 post http://localhost:1337/feed
 Content-Type: application/json
 
 {
-    "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBhcnRoaXYiLCJwYXNzd29yZCI6InBhcnRoaXYxMjMiLCJpYXQiOjE2NDI1ODk3OTd9.vDu6qQg76dvY2tqeeeNuOUS38-18oM7vEnr8z_irPzA",
     "content":"England's umpteenth batting collapse in Hobart and their meek concession of the series also kind of left their victors a little unsure of their own supremacy"
 }
 
@@ -32,4 +34,28 @@ Content-Type: application/json
 get http://localhost:1337/feed
 
 ###
+get http://localhost:1337/feed/6
+
+
+###
 post http://localhost:1337/like
+
+###
+get http://localhost:1337/dummyRT
+
+###
+get http://localhost:1337/dummyAT
+
+###
+get http://localhost:1337/network
+
+###
+post http://localhost:1337/network/pending-connection
+Content-Type: application/json
+
+{
+    "following":"sunny"
+}
+
+
+
