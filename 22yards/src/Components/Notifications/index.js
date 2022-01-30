@@ -4,7 +4,7 @@ import './index.css'
 import NotifMainCard from './notifMainCard.js';
 function Notifications(){
     return (
-        <Container  className='notif-mid-section'>
+        <Container  className='d-flex flex-column'>
             <NotifMainCard />
             <NotifMainCard />
             <NotifMainCard />

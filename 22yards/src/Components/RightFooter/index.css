@@ -1,9 +1,9 @@
 .right-footer{
-    margin-left:77%;
-    width:22%;
-    height:calc(100vh - 65px);
+    height:calc(100vh - 115px);
     background-color: white;
-    margin-right: 1%;
-    position:fixed;
+    overflow-y: scroll;
     border-radius: 5px;
+    margin-left: 2px;
+    margin-right: 2px;
+    margin-bottom: 2px;
 }

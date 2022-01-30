@@ -1,4 +1,4 @@
-@media (min-width:1021px){
+/* @media (min-width:1021px){
     .feed-mid-section{
         display:flex;
         flex-direction: column;
@@ -9,7 +9,7 @@
     }
     .add-post-container{
         position:fixed;
-        margin-left: 50%;
+    
         margin-top: calc(100vh - 130px);
     }
     .add-post-button-styling{
@@ -56,9 +56,10 @@
         overflow-y:scroll;
     }
     .add-post-container{
-        position:fixed;
-        margin-left: 87%;
-        margin-top: calc(100vh - 120px);
+        position:absolute;
+        right:10px;
+        bottom: 55px;
+        
     }
     .add-post-button-styling{
         z-index: 2;
@@ -69,7 +70,7 @@
         padding-bottom:0px;
         border-radius: 100px;
     }
-}
+} */
 
 .add-post-text-area{
     width:95%;
