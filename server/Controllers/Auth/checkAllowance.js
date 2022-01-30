@@ -1,15 +1,23 @@
 const {
     verifyAccessToken,
-    verifyRefreshToken
+    verifyRefreshToken,
 } = require("../../Helpers/Auth/jwtTokenFactory");
+const {
+    performLogout
+} = require("../../Services/Auth/LoginService");
 
-function checkAllowance(req, res,next) {
-    console.log("Iam here")
-    verifyAccessToken(req.cookies.__AT__)
+
+function checkAllowance(req, res, next) {
+    verifyAccessToken(req.cookie.__AT__)
         .then((data) => {
-            req.credentials=data
-            console.log("iam here also")
-            next();
+            verifyRefreshToken(req.cookie.__RT__)
+                .then((data) => {
+                    req.userData = data;
+                    next();
+                })
+                .catch((err) => {
+                    next(err);
+                })
         })
         .catch((err) => {
             console.log(req.cookies.__RT__)
@@ -17,13 +25,13 @@ function checkAllowance(req, res,next) {
                 .then(async (data) => {
                     console.log("IN try")
                     const tokens = await signAllTokens(data);
-
-                    res.cookie('__AT__', tokens.accessToken, {
+                    performLogout(req.cookies.__RT__, data);
+                    res.cookie("__AT__", tokens.accessToken, {
                         maxAge: AT_DURATION,
                         httpOnly: true,
-                        sameSite: 'strict'
-                    })
-                    res.cookie('__RT__', tokens.refreshToken, {
+                        sameSite: "strict",
+                    });
+                    res.cookie("__RT__", tokens.refreshToken, {
                         maxAge: RT_DURATION,
                         httpOnly: true,
                         sameSite: 'strict'

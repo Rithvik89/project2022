@@ -66,6 +66,7 @@ function performLogin(res,username, password) {
 
 }
 
+//add the refresh token to redis
 function performLogout(refreshToken, userData) {
   return new Promise((resolve, reject) => {
     let expirationTimeInSeconds = new Date(0);
