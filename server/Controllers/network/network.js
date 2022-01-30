@@ -26,7 +26,7 @@ async function PendingRequest(req,res,next){
 
      try{
         await RequestConnection(username,following);
-        res.send("request sent Suuccesfully")
+        res.send("request sent Successfully")
      }
      catch(err){
         err.code=501

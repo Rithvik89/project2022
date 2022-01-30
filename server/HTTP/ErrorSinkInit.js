@@ -7,6 +7,8 @@ function SinkErrorFor(app) {
   });
 
   app.use((err, req, res, next) => {
+    console.log(err.srvMessage);
+    console.log(err.stack);
     err = coatError(err);
     res.status(err.code || 500);
 

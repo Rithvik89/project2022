@@ -11,7 +11,7 @@ const {
 } = require('../../Helpers/Auth/jwtTokenFactory');
 const {GetUser} = require('../../DB/DB.Tables/DAO-users');
 
-
+//if already logged in resolves payload else rejects
 function checkIfLogin(refreshToken) {
   return new Promise((resolve, reject) => {
     verifyRefreshToken(refreshToken)
@@ -21,7 +21,10 @@ function checkIfLogin(refreshToken) {
           resolve(payload)
         }
         else{
-          reject()
+          var err = new Error("Unauthorized");
+          err.code = 401;
+          err.srvMessage = 'Cookie Token Black Listed, Login Again';
+          reject(err);
         }
       })
       .catch((err) => {
@@ -36,7 +39,7 @@ function performLogin(res,username, password) {
   return new Promise((resolve, reject) => {
     GetUser(username)
       .then(async (data) => {
-        if (data !== [] && password === data[0].password) {
+        if (data !== undefined && password === data.password) {
           try {
             const tokens = await signAllTokens(data);
             res.cookie('__AT__', tokens.accessToken, {
@@ -56,7 +59,10 @@ function performLogin(res,username, password) {
             reject(err);
           }
         } else {
-          reject(new Error('Invalid Credentials'));
+          var err = new Error("Invalid Credentials");
+          err.code = 401;
+          err.srvMessage = err.message;
+          reject(err);
         }
       })
       .catch((err) => {
@@ -82,7 +88,6 @@ function performLogout(refreshToken, userData) {
          resolve();
       })
       .catch((err) => {
-        console.log("server err")
         reject(err);
       });
   });

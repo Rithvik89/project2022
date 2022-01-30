@@ -1,16 +1,45 @@
 const {
     verifyAccessToken,
     verifyRefreshToken,
+    AT_DURATION,
+    RT_DURATION,
 } = require("../../Helpers/Auth/jwtTokenFactory");
 const {
     performLogout
 } = require("../../Services/Auth/LoginService");
+const {
+    signAllTokens
+} = require("../../Services/Auth/TokenService");
 
 
 function checkAllowance(req, res, next) {
-    verifyAccessToken(req.cookie.__AT__)
+    console.log(req.cookies);
+    if (req.cookies === undefined) {
+        // checking if there is no cookie
+        var err = new Error("Not Authorized");
+        err.code = 401;
+        err.srvMessage = "No Cookies found";
+        return next(err);
+    } else if (
+        // checking if there is no refresh token
+        req.cookies.__AT__ === undefined ||
+        req.cookies.__AT__ === "" ||
+        req.cookies.__AT__ === null ||
+        req.cookies.__RT__ === undefined ||
+        req.cookies.__RT__ === "" ||
+        req.cookies.__RT__ === null
+    ) {
+        var err = new Error("Login Again");
+        err.code = 401;
+        err.srvMessage = "Some Cookies not found";
+        return next(err);
+        
+    }
+    verifyAccessToken(req.cookies.__AT__)
         .then((data) => {
-            verifyRefreshToken(req.cookie.__RT__)
+            console.log("inside then of verfiy acsess token")
+            console.log(data);
+            verifyRefreshToken(req.cookies.__RT__)
                 .then((data) => {
                     req.userData = data;
                     next();
@@ -20,28 +49,31 @@ function checkAllowance(req, res, next) {
                 })
         })
         .catch((err) => {
+            console.log(err);
+            console.log("AT is not valid so refresing both tokens");
             console.log(req.cookies.__RT__)
             verifyRefreshToken(req.cookies.__RT__)
                 .then(async (data) => {
-                    console.log("IN try")
+                    console.log(data);
                     const tokens = await signAllTokens(data);
                     performLogout(req.cookies.__RT__, data);
                     res.cookie("__AT__", tokens.accessToken, {
-                        maxAge: AT_DURATION,
+                        maxAge: AT_DURATION.msformat,
                         httpOnly: true,
                         sameSite: "strict",
                     });
                     res.cookie("__RT__", tokens.refreshToken, {
-                        maxAge: RT_DURATION,
+                        maxAge: RT_DURATION.msformat,
                         httpOnly: true,
                         sameSite: 'strict'
                     })
+                    req.userData = data;
                     next();
                 })
                 .catch((err) => {
                     res.clearCookie('__AT__');
                     res.clearCookie('__RT__');
-                    res.send('login First')
+                    next(err);
                 })
         })
 }
