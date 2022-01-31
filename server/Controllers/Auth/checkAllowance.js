@@ -13,8 +13,9 @@ const {
 
 
 function checkAllowance(req, res, next) {
+    console.log("Inside check allowance printing the cookikes");
     console.log(req.cookies);
-    if (req.cookies === undefined) {
+    if (req.cookies === undefined || req.cookies === {}) {
         // checking if there is no cookie
         var err = new Error("Not Authorized");
         err.code = 401;
@@ -22,9 +23,6 @@ function checkAllowance(req, res, next) {
         return next(err);
     } else if (
         // checking if there is no refresh token
-        req.cookies.__AT__ === undefined ||
-        req.cookies.__AT__ === "" ||
-        req.cookies.__AT__ === null ||
         req.cookies.__RT__ === undefined ||
         req.cookies.__RT__ === "" ||
         req.cookies.__RT__ === null
@@ -57,6 +55,8 @@ function checkAllowance(req, res, next) {
                     console.log(data);
                     const tokens = await signAllTokens(data);
                     performLogout(req.cookies.__RT__, data);
+                    res.clearCookie('__AT__');
+                    res.clearCookie('__RT__');
                     res.cookie("__AT__", tokens.accessToken, {
                         maxAge: AT_DURATION.msformat,
                         httpOnly: true,
@@ -71,6 +71,8 @@ function checkAllowance(req, res, next) {
                     next();
                 })
                 .catch((err) => {
+                    console.log("Hope i dont get printed");
+                    console.log(err);
                     res.clearCookie('__AT__');
                     res.clearCookie('__RT__');
                     next(err);
