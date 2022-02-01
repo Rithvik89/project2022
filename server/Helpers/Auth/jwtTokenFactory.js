@@ -1,13 +1,13 @@
 const jwt = require('jsonwebtoken');
 
 const AT_DURATION = {
-    secformat : 1000*6 ,
-    msformat : 60*10
+    secformat : 60*15 ,
+    msformat : 1000*60*15
 };
 
 const RT_DURATION = {
-    secformat : 1000*60*60 ,
-    msformat : 60*60*24
+    secformat : 60*60*24,
+    msformat : 1000*60*60*24
 };
 
 //creates and resolves token if token is valid else rejects error
