@@ -57,5 +57,13 @@ Content-Type: application/json
     "following":"sunny"
 }
 
+###
+post http://localhost:1337/network/new-connection
+Content-Type: application/json
+
+{
+    "following":"adarsh"
+}
+
 
 

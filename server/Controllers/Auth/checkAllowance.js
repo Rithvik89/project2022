@@ -5,9 +5,6 @@ const {
     RT_DURATION,
 } = require("../../Helpers/Auth/jwtTokenFactory");
 const {
-    performLogout
-} = require("../../Services/Auth/LoginService");
-const {
     signAllTokens
 } = require("../../Services/Auth/TokenService");
 
@@ -22,9 +19,6 @@ function checkAllowance(req, res, next) {
         return next(err);
     } else if (
         // checking if there is no refresh token
-        req.cookies.__AT__ === undefined ||
-        req.cookies.__AT__ === "" ||
-        req.cookies.__AT__ === null ||
         req.cookies.__RT__ === undefined ||
         req.cookies.__RT__ === "" ||
         req.cookies.__RT__ === null
@@ -41,7 +35,7 @@ function checkAllowance(req, res, next) {
             console.log(data);
             verifyRefreshToken(req.cookies.__RT__)
                 .then((data) => {
-                    req.userData = data;
+                    req.credentials = data;
                     next();
                 })
                 .catch((err) => {
@@ -56,19 +50,18 @@ function checkAllowance(req, res, next) {
                 .then(async (data) => {
                     console.log(data);
                     const tokens = await signAllTokens(data);
-                    performLogout(req.cookies.__RT__, data);
                     res.cookie("__AT__", tokens.accessToken, {
                         maxAge: AT_DURATION.msformat,
                         httpOnly: true,
                         sameSite: "strict",
-                    });
+                    })
                     res.cookie("__RT__", tokens.refreshToken, {
                         maxAge: RT_DURATION.msformat,
                         httpOnly: true,
                         sameSite: 'strict'
                     })
-                    req.userData = data;
-                    next();
+                    req.credentials = data
+                    next()
                 })
                 .catch((err) => {
                     res.clearCookie('__AT__');
