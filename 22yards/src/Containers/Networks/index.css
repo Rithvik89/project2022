@@ -8,8 +8,8 @@
     padding-right: 0px;
     margin-left: 10px;
     margin-right:10px;
-    height:calc(100vh - 69px);
-    overflow-y:scroll;
+    height:100%;
+    /* overflow-y:scroll; */
 }
 /* @media (max-width:649px){
    .network-mid-section{
