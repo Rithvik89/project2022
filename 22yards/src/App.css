@@ -9,6 +9,9 @@
 .routing-page{
     display: flex;
     height: calc(100vh - 65px);
+    position: fixed;
     top:65px;
+    right: 0;
+    left: 0;
 }
 

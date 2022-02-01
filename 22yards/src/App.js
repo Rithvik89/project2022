@@ -1,45 +1,49 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
-  BrowserRouter,
+  
   Routes,
   Route,
-  useNavigate
+  useNavigate,
+  useLocation
 } from "react-router-dom";
 import './App.css'
-import Header from './Components/Header'
-import Feed from './Components/Feed'
-import Networks from './Components/Networks'
-import Profile from './Components/Profile'
-import Logout from './Components/Logout'
-import Notifications from './Components/Notifications'
-import SignInAndSignUp from './Components/SignInAndSignUp'
-import FeedBody from './Components/Feed/FeedBody';
-import LeftFooter from './Components/LeftFooter';
-import RightFooter from './Components/RightFooter';
+import Header from './Containers/Header'
+import Feed from './Containers/Feed'
+import Networks from './Containers/Networks'
+import Profile from './Containers/Profile'
+import Logout from './Containers/Logout'
+import Notifications from './Containers/Notifications'
+import SignInAndSignUp from './Containers/SignInAndSignUp'
+import FeedBody from './Containers/Feed/FeedBody';
+import LeftFooter from './Containers/Scores';
+import RightFooter from './Containers/News';
 import Swipe from 'react-easy-swipe';
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 
-import Posts from './Components/Posts';
-import Followers from './Components/Followers';
-import Following from './Components/Following';
+import Posts from './Containers/Posts';
+import Followers from './Containers/Followers';
+import Following from './Containers/Following';
 import {isMobile,isTablet} from 'react-device-detect'
 
 function App(props){
   
-  const [showRightFooter,setRightFooter]=useState(false)
-  const [showLeftFooter,setLeftFooter]=useState(false)
-
+  const [pathWhereIAm,setPathWhereIAm]=useState("")
   const navigate=useNavigate();
-
+  const location=useLocation();
+  
+  useEffect(()=>{
+    const {pathname} = location;
+    setPathWhereIAm(pathname)
+  })
   function handleLeftSwipe(event){
-    navigate('/rightFooter') 
+    navigate('/newsArticles') 
   }
   
   function handleMovementToFeed(){
     navigate('/feed')
   }
   function handleRightSwipe(event){
-    navigate('/leftFooter')
+    navigate('/scores')
 }
   if(isTablet){
       return (  
@@ -47,12 +51,10 @@ function App(props){
         <div className="header">
           <Header/>
         </div>
-         
-          {console.log("This is Desktop")}
-          <div className='routing-page d-flex justify-content-center'   
+          <div className='routing-page d-flex' style={{height:"100%",overflow:"scroll"}}   
           >
             
-              <div style={{width:"60vw",height:"calc(100vh-65px)",marginRight:"1vw"}}>
+              <div style={{width:"60vw",height:"calc(100vh-65px)",marginRight:"1vw",marginLeft:"5vw"}}>
                 <Routes>
                     <Route path="/" element={<SignInAndSignUp/>}/>
                     <Route path="/feed" element={<Feed/>}/>
@@ -63,17 +65,21 @@ function App(props){
                       <Route path="followers" element={<Followers/>}/>
                       <Route path="Following" element={<Following/>}/>
                     </Route>
-
+                    <Route path="/newsArticles" element={<RightFooter/>}/>
+                    <Route path="/scores" element={<LeftFooter/>}/>
                     <Route path="/networks" element={<Networks/>}/>
                     <Route path="/logout" element={<Logout/>}/>
               </Routes>
               </div>
-               <div 
-                 style={{width:"30vw",height:"calc(100vh-65px)",border:"1px solid black"}
-                }   
-               >
-                  <LeftFooter />
-               </div>
+              { (pathWhereIAm!=="/") &&
+                  <div 
+                    style={{width:"29vw",height:"calc(100vh-65px)",border:"1px solid black",
+                        position:"fixed",top:"65px",right:"5vw",bottom:"7px"}
+                    }   
+                  >
+                    <LeftFooter />
+                 </div>
+              }
           </div>
           
       </div>
@@ -85,8 +91,6 @@ function App(props){
           <div className="header">
             <Header/>
           </div>
-            
-              {console.log("This is Phone")}
             <div className='routing-page' 
                style={{height:"calc(100vh-125px)",width:"98vw"}}>
             <Routes>
@@ -99,8 +103,8 @@ function App(props){
                    <Route path="followers" element={<Followers/>}/>
                    <Route path="Following" element={<Following/>}/>
                 </Route>
-                <Route path="/leftFooter" element={<LeftFooter/>}/>
-                <Route path="/rightFooter" element={<RightFooter/>}/>
+                <Route path="/newsArticles" element={<RightFooter/>}/>
+                <Route path="/scores" element={<LeftFooter/>}/>
                 <Route path="/networks" element={<Networks/>}/>
                 <Route path="/logout" element={<Logout/>}/>
           </Routes>
@@ -133,15 +137,15 @@ function App(props){
   else{
     return (  
       <div>
+        {console.log("path",pathWhereIAm)}
         <div className="header">
           <Header/>
         </div>
-         
-          {console.log("This is Desktop")}
-          <div className='routing-page d-flex justify-content-center'   
+          <div className='routing-page d-flex'   
+            style={{height:"100%",overflow:"scroll"}}
           >
             
-              <div style={{width:"43vw",height:"calc(100vh-65px)",marginRight:"1vw"}}>
+              <div style={{width:"43vw",height:"calc(100vh-65px)",marginRight:"1vw",marginLeft:"18vw"}}>
                 <Routes>
                     <Route path="/" element={<SignInAndSignUp/>}/>
                     <Route path="/feed" element={<Feed/>}/>
@@ -152,17 +156,26 @@ function App(props){
                       <Route path="followers" element={<Followers/>}/>
                       <Route path="Following" element={<Following/>}/>
                     </Route>
-
+                    <Route path="/newsArticles" element={<RightFooter/>}/>
+                    <Route path="/scores" element={<LeftFooter/>}/>
                     <Route path="/networks" element={<Networks/>}/>
                     <Route path="/logout" element={<Logout/>}/>
               </Routes>
               </div>
+              { (pathWhereIAm!=="/") &&
+              <>
+              {/* <LeftFooter/> */}
+              <div style={{width:"20vw",height:"calc(100vh-65px)",
+                           position:"fixed",top:"65px",right:"18vw",bottom:"7px"
+              }}>
               <div 
-                style={{width:"20vw",height:"calc(100vh-65px)",border:"1px solid black"}}   
+                style={{width:"100%",height:"100%",border:"1px solid black"}}   
               >
                   <LeftFooter />
               </div>
-               
+              </div>
+              </>
+              }
           </div>
           
       </div>
