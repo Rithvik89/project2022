@@ -1,13 +1,11 @@
 const jwt = require('jsonwebtoken');
 
 const AT_DURATION = {
-    secformat : 1000*60*2 ,
-    msformat : 60*10
+    msformat : 1000*60,
 };
 
 const RT_DURATION = {
-    secformat : 1000*60*60 ,
-    msformat : 60*60*24
+    msformat : 1000*60*60 ,
 };
 
 //creates and resolves token if token is valid else rejects error
@@ -32,7 +30,7 @@ function signAccessToken ( userData ) {
     }
     const secret = process.env.AT_SECRET_KEY;
     const options = {
-        expiresIn : AT_DURATION.secformat,
+        expiresIn : AT_DURATION.msformat,
         issuer : '22yards'
     }
 
@@ -46,10 +44,9 @@ function signRefreshToken ( userData ) {
         username : userData.username,
         email : userData.email_id,
     }
-    console.log(RT_DURATION.secformat)
     const secret = process.env.RT_SECRET_KEY;
     const options = {
-        expiresIn : RT_DURATION.secformat,
+        expiresIn : RT_DURATION.msformat,
         issuer : '22yards'
     }
 
@@ -60,9 +57,6 @@ function signRefreshToken ( userData ) {
 function verifyAccessToken(token) {
     return new Promise((resolve, reject) => {
         jwt.verify(token, process.env.AT_SECRET_KEY, (err, payload) => {
-            console.log("This is access token");
-            console.log(payload)
-            console.log(err);
             if(err) {
                 console.log("some error in verifying token")
                 err.code = 404;
@@ -79,7 +73,6 @@ function verifyAccessToken(token) {
 function verifyRefreshToken(token) {
     return new Promise((resolve, reject) => {
         jwt.verify(token, process.env.RT_SECRET_KEY, (err, payload) => {
-            console.log(payload)
             if(err) {
                 err.code = 404;
                 err.srvMessage = "Refresh Token Not Valid";
