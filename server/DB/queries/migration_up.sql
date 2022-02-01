@@ -40,6 +40,7 @@ CREATE TABLE IF NOT EXISTS connections (
 CREATE TABLE IF NOT EXISTS events (
     user_id INT NOT NULL,
     post_id INT NOT NULL,
+    created_at date,
     FOREIGN KEY (post_id) REFERENCES posts(post_id) ON DELETE CASCADE,
     CONSTRAINT eventskey UNIQUE (user_id, post_id)
 );

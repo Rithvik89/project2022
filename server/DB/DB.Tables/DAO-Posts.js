@@ -22,8 +22,8 @@ function GetAllPosts() {
     return QueryAll(_query.GetAll)
 }
 
-async function fetchFeed(user_id, offset) {
-    return new Promise((resolve, reject) => {
+function fetchFeed(user_id, offset) {
+    return new Promise(async (resolve, reject) => {
         if (typeof (user_id) != 'number' || typeof (offset) != 'number') {
             var err = new Error();
             reject(err);
@@ -34,9 +34,7 @@ async function fetchFeed(user_id, offset) {
         } catch (err) {
             reject(err);
         }
-
     })
-
 }
 
 function GetThisPost(post_id) {
@@ -51,5 +49,6 @@ module.exports = {
     GetAllPosts,
     CreatePost,
     GetThisPost,
-    DeletePost
+    DeletePost,
+    fetchFeed
 }
