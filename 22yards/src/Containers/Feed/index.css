@@ -1,0 +1,116 @@
+/* @media (min-width:1021px){
+    .feed-mid-section{
+        display:flex;
+        flex-direction: column;
+        margin-left:22%;
+        margin-right:24%;
+        height:calc(100vh - 69px);
+        overflow-y:scroll;
+    }
+    .add-post-container{
+        position:fixed;
+    
+        margin-top: calc(100vh - 130px);
+    }
+    .add-post-button-styling{
+        z-index: 2;
+        border: 0px;
+        padding-right:15px;
+        padding-left:15px;
+        padding-top:0px;
+        padding-bottom:0px;
+        border-radius: 100px;
+    }
+}
+@media (min-width:650px) and (max-width:1020px){
+    .feed-mid-section{
+        display:flex;
+        flex-direction: column;
+        margin-left:32%;
+        margin-right:1%;
+        height:calc(100vh - 69px);
+        overflow-y:scroll;
+    }
+    .add-post-container{
+        position:fixed;
+        margin-left: 60%;
+        margin-top: calc(100vh - 125px);
+    }
+    .add-post-button-styling{
+        z-index: 2;
+        border: 0px;
+        padding-right:13px;
+        padding-left:13px;
+        padding-top:0px;
+        padding-bottom:0px;
+        border-radius: 100px;
+    }
+}
+@media (max-width:649px){
+    .feed-mid-section{
+        display:flex;
+        margin-left: 0.5%;
+        margin-right:0.5%;
+        flex-direction: column;
+        height:calc(100vh - 69px);
+        overflow-y:scroll;
+    }
+    .add-post-container{
+        position:absolute;
+        right:10px;
+        bottom: 55px;
+        
+    }
+    .add-post-button-styling{
+        z-index: 2;
+        border: 0px;
+        padding-right:10px;
+        padding-left:10px;
+        padding-top:0px;
+        padding-bottom:0px;
+        border-radius: 100px;
+    }
+} */
+
+.add-post-text-area{
+    width:95%;
+    height:20vh;
+}
+.add-comment-text-area{
+    width:95%;
+    height:18vh;
+    margin-top:2%
+}
+.add-post-header{
+    display:flex;
+}
+.add-post-body{
+    height:25vh
+}
+.add-comment-body{
+    height:25vh;
+}
+
+.feed-mid-section::-webkit-scrollbar {
+    display: none;
+}
+.feed-content-card-header{
+    display:flex;
+}
+.feed-content-user-handle{
+    margin-top: 15px;
+    margin-left: 10px;
+}
+.feed-content-metadata{
+     display:flex;
+     justify-content: space-around;
+}
+.feed-cards{
+    border-radius: 10px;
+    margin-bottom:10px;
+}
+.feed-main-card-img{
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+}

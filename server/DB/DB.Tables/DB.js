@@ -39,7 +39,6 @@ function Query(get_query, arg) {
           err.code = 500;
           reject(err);
         }
-        // console.log(result);
         resolve(result[0]);
       });
   });
