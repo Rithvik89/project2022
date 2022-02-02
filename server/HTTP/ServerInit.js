@@ -16,7 +16,7 @@ function ServerInit(conf) {
 
     app.enable("trust proxy");
 
-    app.use(express.json());
+    app.use(express.json({extended: true}));
     app.use(express.urlencoded({extended : true}));
     app.use(cookieParser());
 

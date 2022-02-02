@@ -7,7 +7,7 @@ function createTables(req,res){
         user_id INT AUTO_INCREMENT,
         username VARCHAR(15) UNIQUE NOT NULL,
         password VARCHAR(15) NOT NULL,
-        email_id VARCHAR(15) NOT NULL,
+        email_id VARCHAR(150) NOT NULL,
         cric_index INT DEFAULT 0,
         profile_image VARCHAR(100),
         registered_date DATE,
@@ -34,10 +34,15 @@ function createTables(req,res){
     );`
 
     const createCommentsTableQuery=`CREATE TABLE IF NOT EXISTS comments (
+        comment_id INT auto_increment primary key,
         post_id INT NOT NULL,
         user_id INT NOT NULL,
+        parent_id INT,
         comment text NOT NULL,
-        FOREIGN KEY (post_id) REFERENCES posts(post_id) ON DELETE CASCADE
+        date timestamp default current_timestamp(),
+        FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+        FOREIGN KEY (post_id) REFERENCES posts(post_id) ON DELETE CASCADE,
+        FOREIGN KEY (parent_id) REFERENCES comments(comment_id) ON DELETE CASCADE
     );`
 
     const createEventsTableQuery=`CREATE TABLE IF NOT EXISTS events (
@@ -93,6 +98,5 @@ function createTables(req,res){
 }
 
 module.exports=createTables
-
 
 
