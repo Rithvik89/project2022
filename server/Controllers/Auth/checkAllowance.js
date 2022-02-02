@@ -58,6 +58,8 @@ function checkAllowance(req, res, next) {
                     next()
                 })
                 .catch((err) => {
+                    console.log("Hope i dont get printed");
+                    console.log(err);
                     res.clearCookie('__AT__');
                     res.clearCookie('__RT__');
                     next(err);
