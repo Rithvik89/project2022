@@ -28,16 +28,7 @@ function Feed(){
     createFeed(posts);
   }
   console.log(posts.length)
-  useEffect(()=>{
-    async function getApis(){
-      const response=await fetch("http://api.mediastack.com/v1/news?access_key=4026e24da647c9772dabae6afb3a16d9&categories=sports&languages=en&keywords=cricket&sort=published_desc",{method:"GET"})
-      const x=await response.json()
-      console.log(x)
-      setTemp([...x.data])
-      // console.log(temp)
-    }
-    getApis();
-  },[])
+  
   return (
     <div className="d-flex flex-column"
          style={{width:"100%"}}

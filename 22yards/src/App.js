@@ -92,7 +92,7 @@ function App(props){
             <Header/>
           </div>
             <div className='routing-page' 
-               style={{height:"calc(100vh-125px)",width:"98vw"}}>
+               style={{height:"calc(100vh-125px)",width:"98vw",overflow:"scroll"}}>
             <Routes>
                 <Route path="/" element={<SignInAndSignUp/>}/>
                 <Route path="/feed" element={<Feed/>}/>
