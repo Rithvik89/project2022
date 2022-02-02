@@ -10,17 +10,6 @@ function routeInit(app)
     app.use('/feed',feedRouter)
     app.use('/network',networkRouter)
 
-    app.get('/dummyAT',(req,res)=>{
-      console.log("I'am in dummy")
-       res.clearCookie('__AT__').send("Access Token Cookie cleared")
-       console.log("Cookie Cleared")
-    })
-    app.get('/dummyRT',(req,res)=>{
-        console.log("I'am in dummy")
-         res.clearCookie('__RT__').send("Refresh Token Cookie cleared")
-         console.log("Cookie Cleared")
-      })
-
 }
 
 module.exports = routeInit;

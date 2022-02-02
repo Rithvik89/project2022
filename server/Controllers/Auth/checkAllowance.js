@@ -5,15 +5,11 @@ const {
     RT_DURATION,
 } = require("../../Helpers/Auth/jwtTokenFactory");
 const {
-    performLogout
-} = require("../../Services/Auth/LoginService");
-const {
     signAllTokens
 } = require("../../Services/Auth/TokenService");
 
 
 function checkAllowance(req, res, next) {
-    console.log(req.cookies);
     if (req.cookies === undefined) {
         // checking if there is no cookie
         var err = new Error("Not Authorized");
@@ -22,9 +18,6 @@ function checkAllowance(req, res, next) {
         return next(err);
     } else if (
         // checking if there is no refresh token
-        req.cookies.__AT__ === undefined ||
-        req.cookies.__AT__ === "" ||
-        req.cookies.__AT__ === null ||
         req.cookies.__RT__ === undefined ||
         req.cookies.__RT__ === "" ||
         req.cookies.__RT__ === null
@@ -37,8 +30,6 @@ function checkAllowance(req, res, next) {
     }
     verifyAccessToken(req.cookies.__AT__)
         .then((data) => {
-            console.log("inside then of verfiy acsess token")
-            console.log(data);
             verifyRefreshToken(req.cookies.__RT__)
                 .then((data) => {
                     req.userData = data;
@@ -50,25 +41,21 @@ function checkAllowance(req, res, next) {
         })
         .catch((err) => {
             console.log(err);
-            console.log("AT is not valid so refresing both tokens");
-            console.log(req.cookies.__RT__)
             verifyRefreshToken(req.cookies.__RT__)
                 .then(async (data) => {
-                    console.log(data);
                     const tokens = await signAllTokens(data);
-                    performLogout(req.cookies.__RT__, data);
                     res.cookie("__AT__", tokens.accessToken, {
                         maxAge: AT_DURATION.msformat,
                         httpOnly: true,
                         sameSite: "strict",
-                    });
+                    })
                     res.cookie("__RT__", tokens.refreshToken, {
                         maxAge: RT_DURATION.msformat,
                         httpOnly: true,
                         sameSite: 'strict'
                     })
-                    req.userData = data;
-                    next();
+                    req.userData = data
+                    next()
                 })
                 .catch((err) => {
                     res.clearCookie('__AT__');

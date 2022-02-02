@@ -1,16 +1,19 @@
 const {
-    CreatePost,
-    GetAllPosts,
-    GetThisPost,
-    DeletePost
+   deletePost, 
+   fetchFeed,
+   fetchPostById,
+   createPost,
+   updatePostById
 } = require('../../DB/DB.Tables/DAO-Posts')
 
 
 async function HandleAddUserPost(req,res,next){
-         const {username}=req.credentials
+         const {user_id}=req.userData
          const {content}=req.body
+         const date=new Date()
+         console.log(user_id,content,date)
          try{
-            await CreatePost(username,content)
+            await createPost(user_id,content,date)
             res.send("Post created successfully")
          }
          catch(err){
@@ -20,17 +23,19 @@ async function HandleAddUserPost(req,res,next){
 }
 
 async function HandleGetAllPosts(req,res){
-        const data=await GetAllPosts()
+        const {user_id}=req.userData
+        const data=await fetchFeed(user_id,0)
         res.send(data)
 }
 
 async function HandleGetThisPost(req,res){
-   const data=await GetThisPost(req.params.id)
+   const feed_id=Number(req.params.id)
+   const data=await fetchPostById(feed_id)
    res.send(data)
 }
 
 async function HandleDeletePost(req,res){
-   await DeletePost(req.params.id)
+   await deletePost(req.params.id)
 }
 
 
