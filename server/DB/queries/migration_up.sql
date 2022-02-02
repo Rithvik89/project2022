@@ -1,17 +1,23 @@
 CREATE TABLE IF NOT EXISTS user (
-    user_id INT PRIMARY KEY AUTO_INCREMENT,
-    username VARCHAR(10) UNIQUE NOT NULL,
-    password VARCHAR(10) NOT NULL,
+    user_id INT AUTO_INCREMENT,
+    username VARCHAR(15) UNIQUE NOT NULL,
+    password VARCHAR(15) NOT NULL,
     email_id VARCHAR(15) NOT NULL,
-    created_at date
+    cric_index INT DEFAULT 0,
+    profile_image VARCHAR(100),
+    registered_date DATE,
+    PRIMARY KEY (user_id)
 );
 
 CREATE TABLE IF NOT EXISTS posts (
-    post_id INT PRIMARY KEY AUTO_INCREMENT,
+    post_id INT AUTO_INCREMENT,
     user_id INT NOT NULL ,
     content text NOT NULL,
     created_at date NOT NULL,
-    likes INT,
+    comments INT DEFAULT 0,
+    likes INT DEFAULT 0,
+    shares INT DEFAULT 0,
+    PRIMARY KEY (post_id),
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
 
@@ -30,11 +36,19 @@ CREATE TABLE IF NOT EXISTS comments (
 );
 
 CREATE TABLE IF NOT EXISTS connections (
-    police INT NOT NULL,
-    thief INT NOT NULL,
-    CONSTRAINT followkey UNIQUE (police, thief),
-    FOREIGN KEY (police) REFERENCES users(user_id) ON DELETE CASCADE,
-    FOREIGN KEY (thief) REFERENCES users(user_id) ON DELETE CASCADE
+    fan INT NOT NULL,
+    celebrity INT NOT NULL,
+    CONSTRAINT followkey UNIQUE (fan, celebrity),
+    FOREIGN KEY (fan) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (celebrity) REFERENCES users(user_id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS pendingconnections (
+    fan INT NOT NULL,
+    celebrity INT NOT NULL,
+    CONSTRAINT followkey UNIQUE (fan, celebrity),
+    FOREIGN KEY (fan) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (celebrity) REFERENCES users(user_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS events (
