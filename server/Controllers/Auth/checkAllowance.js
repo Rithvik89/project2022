@@ -10,7 +10,6 @@ const {
 
 
 function checkAllowance(req, res, next) {
-    console.log(req.cookies);
     if (req.cookies === undefined) {
         // checking if there is no cookie
         var err = new Error("Not Authorized");
@@ -31,11 +30,9 @@ function checkAllowance(req, res, next) {
     }
     verifyAccessToken(req.cookies.__AT__)
         .then((data) => {
-            console.log("inside then of verfiy acsess token")
-            console.log(data);
             verifyRefreshToken(req.cookies.__RT__)
                 .then((data) => {
-                    req.credentials = data;
+                    req.userData = data;
                     next();
                 })
                 .catch((err) => {
@@ -44,11 +41,8 @@ function checkAllowance(req, res, next) {
         })
         .catch((err) => {
             console.log(err);
-            console.log("AT is not valid so refresing both tokens");
-            console.log(req.cookies.__RT__)
             verifyRefreshToken(req.cookies.__RT__)
                 .then(async (data) => {
-                    console.log(data);
                     const tokens = await signAllTokens(data);
                     res.cookie("__AT__", tokens.accessToken, {
                         maxAge: AT_DURATION.msformat,
@@ -60,7 +54,7 @@ function checkAllowance(req, res, next) {
                         httpOnly: true,
                         sameSite: 'strict'
                     })
-                    req.credentials = data
+                    req.userData = data
                     next()
                 })
                 .catch((err) => {

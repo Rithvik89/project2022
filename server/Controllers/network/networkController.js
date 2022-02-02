@@ -7,11 +7,10 @@ const {
 }= require('../../DB/DB.Tables/DAO-Networks')
 
 async function ViewNetworkSection(req,res,next){
-    const {username}=req.credentials
-    console.log(username)
+    const {user_id}=req.userData
     try{
-       const pending=await GetPendingNetworks(username)
-       const recommend=await GetRecommendedNetworks()
+       const pending=await GetPendingNetworks(user_id)
+       const recommend=await GetRecommendedNetworks(user_id)
        res.send({pending,recommend})
     }
     catch(err){
@@ -21,11 +20,11 @@ async function ViewNetworkSection(req,res,next){
 }
 
 async function PendingRequest(req,res,next){
-     const {username}=req.credentials
-     const {following}=req.body
-
+     const {user_id}=req.userData
+     const {celebrity}=req.body
+     console.log(typeof(celebrity))
      try{
-        await RequestConnection(username,following);
+        await RequestConnection(user_id,celebrity);
         res.send("request sent Successfully")
      }
      catch(err){
@@ -35,14 +34,15 @@ async function PendingRequest(req,res,next){
 }
 
 async function NewConnectionMade(req,res,next){
-    const {username}=req.credentials
-    const {following}=req.body
+    const {user_id}=req.userData
+    const {fan}=req.body
 
     try{
         // Accept the connection...
-       await AcceptConnection(username,following);
+       await AcceptConnection(fan,user_id);
        // drop that conection from pending table.....
-       await DropConnectionFromPending(username,following);
+       console.log("Hello")
+       await DropConnectionFromPending(fan,user_id);
        res.send("Connection Made succesfully")
     }
     catch(err){

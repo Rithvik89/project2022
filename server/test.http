@@ -5,9 +5,9 @@ post http://localhost:1337/register
 Content-Type: application/json
 
 {
-    "username": "sunny",
-    "password": "sunny123",
-    "email_id": "sunny..."
+    "username": "swagru",
+    "password": "swagru554",
+    "email_id": "swagru..."
 }
 
 ###
@@ -15,8 +15,8 @@ post http://localhost:1337/login
 Content-Type: application/json
 
 {
-    "username":"sunny",
-    "password":"sunny123"
+    "username":"saichand",
+    "password":"saichand13"
 }
 
 ###
@@ -34,17 +34,11 @@ Content-Type: application/json
 get http://localhost:1337/feed
 
 ###
-get http://localhost:1337/feed/6
+get http://localhost:1337/feed/11
 
 
 ###
 post http://localhost:1337/like
-
-###
-get http://localhost:1337/dummyRT
-
-###
-get http://localhost:1337/dummyAT
 
 ###
 get http://localhost:1337/network
@@ -54,7 +48,7 @@ post http://localhost:1337/network/pending-connection
 Content-Type: application/json
 
 {
-    "following":"sunny"
+    "celebrity":1
 }
 
 ###
@@ -62,7 +56,7 @@ post http://localhost:1337/network/new-connection
 Content-Type: application/json
 
 {
-    "following":"adarsh"
+    "fan":2
 }
 
 

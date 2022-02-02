@@ -1,5 +1,5 @@
 const {Router} =require('express')
-const {ViewNetworkSection,PendingRequest,NewConnectionMade} =require('../Controllers/network/network')
+const {ViewNetworkSection,PendingRequest,NewConnectionMade} =require('../Controllers/network/networkController')
 const checkAllowance=require('../Controllers/Auth/checkAllowance')
 const networkRouter=Router()
 

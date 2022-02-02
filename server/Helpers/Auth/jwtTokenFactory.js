@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 const AT_DURATION = {
-    msformat : 1000*60,
+    msformat : 1000*60*15
 };
 
 const RT_DURATION = {
@@ -25,8 +25,10 @@ function createToken(payload, secret , options ) {
 //creates and resolves token if token is valid else rejects error
 function signAccessToken ( userData ) {
     const  payload = {
+        user_id : userData.user_id,
         username : userData.username,
         email : userData.email_id,
+        registered_date: userData.registered_date
     }
     const secret = process.env.AT_SECRET_KEY;
     const options = {
@@ -41,8 +43,10 @@ function signAccessToken ( userData ) {
 //creates and resolves token if token is valid else rejects error
 function signRefreshToken ( userData ) {
     const  payload = {
+        user_id : userData.user_id,
         username : userData.username,
         email : userData.email_id,
+        registered_date: userData.registered_date
     }
     const secret = process.env.RT_SECRET_KEY;
     const options = {
