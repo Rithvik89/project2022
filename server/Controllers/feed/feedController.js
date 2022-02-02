@@ -29,7 +29,8 @@ async function HandleGetAllPosts(req,res){
 }
 
 async function HandleGetThisPost(req,res){
-   const data=await fetchPostById(req.params.id)
+   const feed_id=Number(req.params.id)
+   const data=await fetchPostById(feed_id)
    res.send(data)
 }
 

@@ -63,6 +63,7 @@ function fetchFeed(user_id, offset) {
 
 function fetchPostById(post_id) {
     return new Promise(async (resolve, reject) => {
+        console.log(typeof(post_id))
         if(typeof(post_id) != 'number') {
             var err = new Error();
             reject(err);
