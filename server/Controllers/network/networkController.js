@@ -8,10 +8,9 @@ const {
 
 async function ViewNetworkSection(req,res,next){
     const {username}=req.credentials
-    console.log(username)
     try{
        const pending=await GetPendingNetworks(username)
-       const recommend=await GetRecommendedNetworks()
+       const recommend=await GetRecommendedNetworks(username)
        res.send({pending,recommend})
     }
     catch(err){
@@ -22,10 +21,10 @@ async function ViewNetworkSection(req,res,next){
 
 async function PendingRequest(req,res,next){
      const {username}=req.credentials
-     const {following}=req.body
+     const {celebrity}=req.body
 
      try{
-        await RequestConnection(username,following);
+        await RequestConnection(username,celebrity);
         res.send("request sent Successfully")
      }
      catch(err){
@@ -36,13 +35,13 @@ async function PendingRequest(req,res,next){
 
 async function NewConnectionMade(req,res,next){
     const {username}=req.credentials
-    const {following}=req.body
+    const {fan}=req.body
 
     try{
         // Accept the connection...
-       await AcceptConnection(username,following);
+       await AcceptConnection(fan,username);
        // drop that conection from pending table.....
-       await DropConnectionFromPending(username,following);
+       await DropConnectionFromPending(fan,username);
        res.send("Connection Made succesfully")
     }
     catch(err){
