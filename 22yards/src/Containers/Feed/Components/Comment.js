@@ -1,11 +1,11 @@
-import {Button,Modal,Card} from 'react-bootstrap'
+import {Button,Modal} from 'react-bootstrap'
 import {useState} from 'react'
 import { FaCommentAlt} from "react-icons/fa";
 
 
 function Comment(props){
         const {postDetails}=props
-        const {user,content}=postDetails
+        const {user}=postDetails
         const [show, setShow] = useState(false);
       
         const handleClose = () => setShow(false);

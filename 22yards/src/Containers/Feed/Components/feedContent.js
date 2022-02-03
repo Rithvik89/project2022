@@ -1,9 +1,9 @@
-import {Card,Button,Modal} from 'react-bootstrap';
+import {Card,Button} from 'react-bootstrap';
 import {Link} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { AiFillLike } from "react-icons/ai";
 import { FaShare } from "react-icons/fa";
-import './index.css'
+import '../index.css'
 import Comment from './Comment';
 
 
@@ -11,7 +11,7 @@ function FeedContent(props){
     const {posts}=props
     return (
            posts.map(post=>{
-               const {link,user,content,id}=post
+               const {link,id}=post
                return (
                 <Card className="text-center feed-cards">
                     

@@ -1,7 +1,12 @@
 .right-footer{
     overflow-y: scroll;
-    border-radius: 5px;
+    
     margin-left: 2px;
     margin-right: 2px;
-    margin-bottom: 2px;
+    
+}
+.news-card-image{
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
 }

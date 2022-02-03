@@ -22,24 +22,21 @@ export default function SingleNewsCard({news}){
 
     return(
         <div className="d-flex mb-3 p-2" style={{border:"1px solid black",width:"100%",backgroundColor:"white"}}>
-            <div style={{width:"70%"}}>
+            <div style={{width:"100%"}}>
                 <h6>{news.pubDate}</h6>
                 <h4>{news.title}</h4>
-                <div style={{maxHeight:"100px",overflow:"hidden"}}>
-                    <p>{news.description}</p>
-                </div>
                 <p style={{cursor:"pointer",textDecoration:"underline"}}
                    onClick={()=>{
                        window.open(news.link,"_blank")
                    }}
                 >Read Full Article</p>
             </div>
-            <div style={{width:"30%",maxHeight:"200px"}} className="d-flex align-items-center">
+            <div className="d-flex align-items-center">
                 {
-                    news.image_url && <img style={{height:"100%",maxHeight:"200px",width:"100%"}} src={news.image_url}/>
+                    news.image_url && <img className="news-card-image" src={news.image_url}/>
                 }
                 {
-                    !news.image_url && <img style={{height:"100%",maxHeight:"200px",width:"100%"}} src={randomImageUrls[randNumber()]}/>
+                    !news.image_url && <img className="news-card-image" src={randomImageUrls[randNumber()]}/>
                 }
             </div>
         </div>

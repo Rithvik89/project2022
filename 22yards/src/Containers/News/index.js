@@ -161,7 +161,7 @@ export default function RightFooter(){
     }
     //Coponent Initial Mount
     useEffect(()=>{
-       getArticles(1);
+      // getArticles(1);
     },[])
     
     function loadMoreArticles(){
@@ -169,9 +169,14 @@ export default function RightFooter(){
         setCurrentFetchPage(currentFetchPage+1)
     }
     return(
-        <div className="right-footer" style={{width:"100%"}}>
-                
+        <div className="right-footer " style={{width:"100%"}}>
                 {
+              
+                    temp.map((each)=>(
+                       <SingleNewsCard news={each}/>
+                    ))
+                } 
+                {/* {
                     articlesList.length!==0 && 
                     articlesList.map((each)=>(
                        <SingleNewsCard news={each}/>
@@ -180,8 +185,10 @@ export default function RightFooter(){
                 {
                     articlesList.length===0 &&
                     <h1>No More Articles</h1>
-                } 
+                }  */}
+               
                 <button onClick={loadMoreArticles}>Load More</button>
+                
                 {isLoading && <Loader/>}
         </div>
     )

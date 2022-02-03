@@ -1,9 +1,9 @@
 import {Card,Button,Container} from 'react-bootstrap'
-import {Link, useParams} from 'react-router-dom'
+import {useParams} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { AiFillLike } from "react-icons/ai";
 import { FaShare } from "react-icons/fa";
-import Comment from '../Comment';
+import Comment from '../Components/Comment';
 import CommentSection from './CommentSection';
 import './index.css'
 
