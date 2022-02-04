@@ -13,10 +13,10 @@ const _query = {
                 SELECT posts.post_id, posts.user_id, posts.content, posts.created_at, posts.likes 
                 FROM posts  
                 INNER JOIN events ON posts.post_id = events.post_id 
-                WHERE post_id in (SELECT thief FROM connections 
+                WHERE posts.user_id in (SELECT thief FROM connections 
                                 WHERE police = ?)
                 LIMIT 20 OFFSET ? ORDER BY events.created_at DESC 
-            `   
+            `
 }
 
 // defining functions 
@@ -25,8 +25,10 @@ function createPost(user_id, content, created_at, likes) {
     return new Promise(async (resolve, reject) => {
         try {
             if (typeof (user_id) != Number) {
-                var error = new Error();
-                reject(error);
+                var err = new Error('Invalid Inputs');
+                err.srvMessage = "user_id is not a number(invalid input) for GetUser By Id";
+                err.code = 400;
+                throw err;
             }
             var results = await Exec(CreatePost, [user, content, created_at, likes]);
             resolve(results);
@@ -40,8 +42,10 @@ function updatePostById(post_id, content) {
     return new Promise(async (resolve, reject) => {
         try {
             if (typeof (post_id) != Number) {
-                var error = new Error();
-                reject(error);
+                var err = new Error('Invalid Inputs');
+                err.srvMessage = "post_id is not a number(invalid input) for GetUser By Id";
+                err.code = 400;
+                throw err;
             }
             var results = await Exec(Update, [content, post_id]);
             resolve(results);
@@ -54,8 +58,10 @@ function updatePostById(post_id, content) {
 function fetchFeed(user_id, offset) {
     return new Promise(async (resolve, reject) => {
         if (typeof (user_id) != 'number' || typeof (offset) != 'number') {
-            var err = new Error();
-            reject(err);
+            var err = new Error('Invalid Inputs');
+            err.srvMessage = "user_id is not a number(invalid input) for GetUser By Id";
+            err.code = 400;
+            throw err;
         }
         try {
             var results = await QueryAll(GetFeed, [user_id, offset]);
@@ -68,14 +74,16 @@ function fetchFeed(user_id, offset) {
 
 function fetchPostById(post_id) {
     return new Promise(async (resolve, reject) => {
-        if(typeof(post_id) != 'number') {
-            var err = new Error();
-            reject(err);
+        if (typeof (post_id) != 'number') {
+            var err = new Error('Invalid Inputs');
+            err.srvMessage = "user_id is not a number(invalid input) for GetUser By Id";
+            err.code = 400;
+            throw err;
         }
         try {
             var results = await Query(GetPostById, [post_id]);
             resolve(results);
-        } catch(err) {
+        } catch (err) {
             reject(err);
         }
     })
@@ -83,21 +91,23 @@ function fetchPostById(post_id) {
 
 function deletePost(post_id) {
     return new Promise(async (resolve, reject) => {
-        if(typeof(post_id) != 'number') {
-            var err = new Error();
-            reject(err);
+        if (typeof (post_id) != 'number') {
+            var err = new Error('Invalid Inputs');
+            err.srvMessage = "post_id is not a number(invalid input) for GetUser By Id";
+            err.code = 400;
+            throw err;
         }
         try {
             var results = await Exec(DeletePost, [post_id]);
             resolve(results);
-        } catch(err) {
+        } catch (err) {
             reject(err);
         }
     })
 }
 
 module.exports = {
-    deletePost, 
+    deletePost,
     fetchFeed,
     fetchPostById,
     createPost,
