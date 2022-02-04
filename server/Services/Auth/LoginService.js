@@ -43,12 +43,12 @@ function performLogin(res,username, password) {
           try {
             const tokens = await signAllTokens(data);
             res.cookie('__AT__', tokens.accessToken, {
-              maxAge: AT_DURATION.secformat,
+              maxAge: AT_DURATION.msformat,
               httpOnly: true,
               sameSite: 'strict'
             })
             res.cookie('__RT__', tokens.refreshToken, {
-              maxAge: RT_DURATION.secformat,
+              maxAge: RT_DURATION.msformat,
               httpOnly: true,
               sameSite: 'strict'
             })

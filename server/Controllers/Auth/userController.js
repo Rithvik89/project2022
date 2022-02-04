@@ -6,11 +6,12 @@ const { checkIfLogin, performLogin,performLogout} = require("../../Services/Auth
 
 async function HandleUserRegister(req, res,next) {
   const { username, password, email_id } = req.body;
+  const date=new Date()
   GetUser(username)
     .then(async (result) => {
-      if (result.length===0) {
+      if (result===undefined) {
         try {
-          await CreateUser(username, password, email_id);
+          await CreateUser(username, password, email_id,date);
           res.send("Registered successfully");
         } catch (err) {
           next(err);

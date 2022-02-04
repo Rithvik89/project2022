@@ -5,13 +5,15 @@ const {
 } = require('./DB')
 
 const _query = {
-    Create: `INSERT INTO users (username,password,email_id, profile_picture, created_at) VALUES (?,?,?,?,?) `,
-    GetUser: `SELECT * FROM users WHERE user_idz=?`,
+    Create: `INSERT INTO users (username,password,email_id,registered_date) VALUES (?,?,?,?) `,
+    GetAll: `SELECT * FROM users`,
+    GetUser:`SELECT * FROM users WHERE username=?`,
     Delete: `DELETE FROM users WHERE user_id=?`,
     Update: `UPDATE users SET password = ?, profile_picture = ? where user_id = ?`
 };
 
 // defining my functions
+
 
 async function CreateUser(username, password, email_id, profile_picture, created_at) {
     try {

@@ -9,24 +9,9 @@
 .routing-page{
     display: flex;
     height: calc(100vh - 65px);
+    position: fixed;
     top:65px;
+    right: 0;
+    left: 0;
 }
 
-.left-footer{
-    width:20%;
-    height:calc(100vh - 65px);
-    background-color: white;
-    margin-left:1%;
-    margin-right: 1%;
-    position:fixed;
-    border-radius: 5px;
-}
-.right-footer{
-    margin-left:77%;
-    width:22%;
-    height:calc(100vh - 65px);
-    background-color: white;
-    margin-right: 1%;
-    position:fixed;
-    border-radius: 5px;
-}
