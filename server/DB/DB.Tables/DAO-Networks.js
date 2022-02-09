@@ -1,10 +1,13 @@
 const {QueryAll,Exec,Query}=require('./DB')
 
 const _query={
+
     GetPending:`select * from users
       where user_id IN (
         select fan from pendingconnections WHERE celebrity=(?)
       )`,
+
+
     GetRecommend:`select * from users
         where NOT user_id IN (
             select user_id from users where user_id=(?)
@@ -25,24 +28,83 @@ const _query={
 
 // defining function...
 
-function RequestConnection(fan,celebrity){
-    return Exec(_query.InitiateConnection,[fan,celebrity])
+
+await function RequestConnection(follower_id,following_id){
+    if(typeof(follower_id) != 'number' || typeof(following_id) != 'number') {
+        var err = new Error('Invalid Inputs');
+        err.srvMessage = "follower_id or following_id is not a number(invalid input) for GetUser By Id";
+        err.code = 400;
+        throw err;
+    }
+    try {
+        var result = await Exec(_query.InitiateConnection,[follower_id,following_id])
+        return result;
+    } catch (err) {
+        return err;
+    }
 } 
 
-function AcceptConnection(fan,celebrity){
-    return Exec(_query.AcceptConnection,[fan,celebrity])    
+function AcceptConnection(follower_id,following_id){
+    if(typeof(follower_id) != 'number' || typeof(following_id) != 'number') {
+        var err = new Error('Invalid Inputs');
+        err.srvMessage = "follower_id or following_id is not a number(invalid input) for GetUser By Id";
+        err.code = 400;
+        throw err;
+    }
+    try {
+        var result = await Exec(_query.AcceptConnection,[follower_id,following_id])
+        return result;
+    } catch (err) {
+        return err;
+    }   
 }
 
-function GetPendingNetworks(celebrity){
-    return QueryAll(_query.GetPending,[celebrity])
+function GetPendingNetworks(following_id){
+    if(typeof(follower_id) != 'number' || typeof(following_id) != 'number') {
+        var err = new Error('Invalid Inputs');
+        err.srvMessage = "follower_id or following_id is not a number(invalid input) for GetUser By Id";
+        err.code = 400;
+        throw err;
+    }
+    try {
+        var result = await QueryAll(_query.GetPending,[following_id])
+        return result;
+    } catch (err) {
+        return err;
+    }
+    
 }
 
-function GetRecommendedNetworks(user){
-    return QueryAll(_query.GetRecommend,[user,user,user,user,user])
+function GetRecommendedNetworks(){
+    if(typeof(follower_id) != 'number' || typeof(following_id) != 'number') {
+        var err = new Error('Invalid Inputs');
+        err.srvMessage = "follower_id or following_id is not a number(invalid input) for GetUser By Id";
+        err.code = 400;
+        throw err;
+    }
+    try {
+        var result = await QueryAll(_query.GetRecommend)
+        return result;
+    } catch (err) {
+        return err;
+    }
+    
 }
 
-function DropConnectionFromPending(fan,celebrity){
-    return Exec(_query.DropConnection,[fan,celebrity]) 
+function DropConnectionFromPending(follower_id,following_id){
+    if(typeof(follower_id) != 'number' || typeof(following_id) != 'number') {
+        var err = new Error('Invalid Inputs');
+        err.srvMessage = "follower_id or following_id is not a number(invalid input) for GetUser By Id";
+        err.code = 400;
+        throw err;
+    }
+    try {
+        var result = await Exec(_query.DropConnection,[follower_id,following_id]);
+        return result;
+    } catch (err) {
+        return err;
+    }
+
 }
 
 module.exports={RequestConnection,AcceptConnection,GetPendingNetworks,GetRecommendedNetworks,DropConnectionFromPending}
