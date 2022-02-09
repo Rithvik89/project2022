@@ -5,34 +5,34 @@ const {mysql_pool}=config
 function createTables(req,res){
     const createUserTableQuery=`CREATE TABLE IF NOT EXISTS users(
         user_id INT AUTO_INCREMENT,
-        username VARCHAR(10),
-        password VARCHAR(10),
-        email_id VARCHAR(15),
+        username VARCHAR(20) NOT NULL,
+        password VARCHAR(255) NOT NULL,
+        email_id VARCHAR(40) NOT NULL,
         cric_index INT DEFAULT 0,
-        profile_image VARCHAR(100),
-        registered_date DATE,
+        profile_image TEXT,
+        created_at DATE NOT NULL,
         primary key (user_id)
     );`
     const createPostTableQuery=`CREATE TABLE IF NOT EXISTS posts (
         post_id INT AUTO_INCREMENT,
-        username VARCHAR(10),
-        content TEXT,
+        user_id INT NOT NULL,
+        content TEXT NOT NULL,
         comments INT DEFAULT 0,
         likes INT DEFAULT 0,
         shares INT DEFAULT 0,
-        post_date DATE,
+        created_at DATE NOT NULL,
         primary key (post_id)
     );`
     const createConnectionTableQuery=`CREATE TABLE IF NOT EXISTS connections(
         connection_id INT AUTO_INCREMENT,
-        fan VARCHAR(15),
-        celebrity VARCHAR(15),
+        fan INT NOT NULL,
+        celebrity INT NOT NULL,
         primary key (connection_id)
     );`
     const createPendingConnectionTableQuery=`CREATE TABLE IF NOT EXISTS pendingConnections(
         pending_id INT AUTO_INCREMENT,
-        fan VARCHAR(15),
-        celebrity VARCHAR(15),
+        fan INT NOT NULL,
+        celebrity INT NOT NULL,
         primary key (pending_id)
     );`
     

@@ -4,9 +4,9 @@ const { HandleAddUserPost, HandleGetAllPosts,HandleGetThisPost } = require('../C
 
 const feedRouter=Router()
 
-feedRouter.post('/',checkAllowance,HandleAddUserPost)
-feedRouter.get('/',checkAllowance,HandleGetAllPosts)
-feedRouter.get('/:id',checkAllowance,HandleGetThisPost)
+feedRouter.post('/',checkAllowance, HandleAddUserPost)
+feedRouter.get('/',checkAllowance, HandleGetAllPosts)
+feedRouter.get('/:id',checkAllowance, HandleGetThisPost)
 
 
 module.exports=feedRouter
