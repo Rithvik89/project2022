@@ -32,7 +32,7 @@ function checkAllowance(req, res, next) {
         .then((data) => {
             verifyRefreshToken(req.cookies.__RT__)
                 .then((data) => {
-                    req.credentials = data;
+                    req.userData = data;
                     next();
                 })
                 .catch((err) => {
@@ -54,12 +54,10 @@ function checkAllowance(req, res, next) {
                         httpOnly: true,
                         sameSite: 'strict'
                     })
-                    req.credentials = data
+                    req.userData = data
                     next()
                 })
                 .catch((err) => {
-                    console.log("Hope i dont get printed");
-                    console.log(err);
                     res.clearCookie('__AT__');
                     res.clearCookie('__RT__');
                     next(err);
