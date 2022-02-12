@@ -5,10 +5,11 @@ const {
 } = require('./DB')
 
 const _query = {
-    Create: `INSERT INTO posts ( user_id ,content , created_at, likes) VALUES (?,?,?,?)`,
+    Create: `INSERT INTO posts ( user_id ,content , created_at) VALUES (?,?,?)`,
     GetPostById: `SELECT * FROM posts WHERE post_id=?`,
     Delete: `DELETE FROM posts WHERE post_id=?`,
     Update: `UPDATE posts SET content=? WHERE post_id = ?`,
+
     GetFeed: `  
                 SELECT posts.post_id, posts.user_id, posts.content, posts.created_at, posts.likes 
                 FROM posts  
@@ -21,7 +22,7 @@ const _query = {
 
 // defining functions 
 
-function createPost(user_id, content, created_at, likes) {
+function createPost(user_id, content, created_at) {
     return new Promise(async (resolve, reject) => {
         try {
             if (typeof (user_id) != Number) {
@@ -29,9 +30,10 @@ function createPost(user_id, content, created_at, likes) {
                 err.srvMessage = "user_id is not a number(invalid input) for GetUser By Id";
                 err.code = 400;
                 throw err;
+
             }
-            var results = await Exec(CreatePost, [user, content, created_at, likes]);
-            resolve(results);
+            await Exec(_query.Create, [user_id, content, created_at]);
+            resolve()
         } catch (err) {
             reject(err);
         }
@@ -47,7 +49,7 @@ function updatePostById(post_id, content) {
                 err.code = 400;
                 throw err;
             }
-            var results = await Exec(Update, [content, post_id]);
+            var results = await Exec(_query.Update, [content, post_id]);
             resolve(results);
         } catch (err) {
             reject(err);
@@ -64,7 +66,7 @@ function fetchFeed(user_id, offset) {
             throw err;
         }
         try {
-            var results = await QueryAll(GetFeed, [user_id, offset]);
+            var results = await QueryAll(_query.GetFeed, [user_id, offset]);
             resolve(results);
         } catch (err) {
             reject(err);
@@ -81,7 +83,7 @@ function fetchPostById(post_id) {
             throw err;
         }
         try {
-            var results = await Query(GetPostById, [post_id]);
+            var results = await Query(_query.GetPostById, [post_id]);
             resolve(results);
         } catch (err) {
             reject(err);
@@ -98,7 +100,7 @@ function deletePost(post_id) {
             throw err;
         }
         try {
-            var results = await Exec(DeletePost, [post_id]);
+            var results = await Exec(_query.Delete, [post_id]);
             resolve(results);
         } catch (err) {
             reject(err);
