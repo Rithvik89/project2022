@@ -1,33 +1,43 @@
 const {
+    type
+} = require('express/lib/response');
+const {
     QueryAll,
     Exec,
     Query
 } = require('./DB')
 
 const _query = {
-    Create: `INSERT INTO posts ( user_id ,content , created_at) VALUES (?,?,?)`,
+    Create: `INSERT INTO posts 
+        ( user_id ,content , created_at) 
+        VALUES (?,?,?)`,
     GetPostById: `SELECT * FROM posts WHERE post_id=?`,
     Delete: `DELETE FROM posts WHERE post_id=?`,
     Update: `UPDATE posts SET content=? WHERE post_id = ?`,
 
     GetFeed: `  
-                SELECT posts.post_id, posts.user_id, posts.content, posts.created_at, posts.likes 
+                SELECT DISTINCT posts.post_id, posts.user_id, 
+                        posts.content, posts.created_at, 
+                        posts.likes , events.created_at
                 FROM posts  
-                INNER JOIN events ON posts.post_id = events.post_id 
-                WHERE posts.user_id in (SELECT thief FROM connections 
-                                WHERE police = ?)
-                LIMIT 20 OFFSET ? ORDER BY events.created_at DESC 
+                INNER JOIN events ON    
+                        posts.post_id = events.post_id 
+                WHERE posts.user_id in 
+                            (SELECT celebrity FROM connections 
+                                WHERE fan = ?)
+                ORDER BY events.created_at DESC LIMIT 200 OFFSET ? ;
             `
 }
 
 // defining functions 
 
 function createPost(user_id, content, created_at) {
+    console.log(typeof (user_id))
     return new Promise(async (resolve, reject) => {
         try {
-            if (typeof (user_id) != Number) {
+            if (typeof (user_id) != 'number') {
                 var err = new Error('Invalid Inputs');
-                err.srvMessage = "user_id is not a number(invalid input) for GetUser By Id";
+                err.srvMessage = "user_id is not a number(invalid input) for createPost By Id";
                 err.code = 400;
                 throw err;
 

@@ -5,34 +5,33 @@ const {
 } = require('./DB')
 
 const _query = {
-    Create: `INSERT INTO users (username,password,email_id,registered_date) VALUES (?,?,?,?) `,
-    GetAll: `SELECT * FROM users`,
-    GetUser:`SELECT * FROM users WHERE username=?`,
+    Create: `INSERT INTO users
+            (username , password , email_id , profile_image, registered_date) 
+            VALUES (?,?,?,?, ?) `,
+    GetUser: `SELECT * FROM users WHERE username=?`,
     Delete: `DELETE FROM users WHERE user_id=?`,
-    Update: `UPDATE users SET password = ?, profile_picture = ? where user_id = ?`
+    Update: `UPDATE users 
+                SET password = ?, profile_picture = ? 
+                where user_id = ?`
 };
 
-// defining my functions
 
-
-async function CreateUser(username, password, email_id, profile_picture, created_at) {
+async function CreateUser(username, password, email_id,
+    profile_picture) {
     try {
-        const results = await Exec(_query.Create, [username, password, email_id, profile_picture, created_at]);
+        const registered_date = registered_date
+        const results = await Exec(_query.Create, [username, password,
+            email_id, profile_picture, registered_date
+        ]);
         return results;
     } catch (err) {
         throw err;
     }
 }
 
-async function GetUser(user_id) {
-    if (typeof (user_id) != 'number') {
-        var err = new Error('Invalid Inputs');
-        err.srvMessage = "user_id is not a number(invalid input) for GetUser By Id";
-        err.code = 400;
-        throw err;
-    }
+async function GetUser(username) {
     try {
-        var result = await Query(_query.GetUser, [user_id]);
+        var result = await Query(_query.GetUser, [username]);
         return result;
     } catch (err) {
         throw err;
@@ -40,7 +39,7 @@ async function GetUser(user_id) {
 }
 
 async function UpdateUser(user_id, password, profile_picture) {
-    if(typeof(user_id) != 'number') {
+    if (typeof (user_id) != 'number') {
         var err = new Error('Invalid Inputs');
         err.srvMessage = "user_id is not a number(invalid input) for GetUser By Id";
         err.code = 400;
@@ -56,7 +55,6 @@ async function UpdateUser(user_id, password, profile_picture) {
 
 
 module.exports = {
-    GetAllUsers,
     CreateUser,
     GetUser,
     UpdateUser

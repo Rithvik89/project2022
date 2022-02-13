@@ -17,9 +17,11 @@ function Exec(create_query, arg) {
 }
 
 function QueryAll(get_all_query,arg) {
+  console.log('query all')
   return new Promise(async (resolve, reject) => {
       mysql_pool.query(get_all_query,arg, (error, result, field) => {
         if (error) {
+          console.log(error);
           var err = new Error('internal server error');
           err.srvMessage = error.sqlMessage;
           err.code = 500;

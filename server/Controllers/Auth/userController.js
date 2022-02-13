@@ -2,24 +2,34 @@ const {
   CreateUser,
   GetUser,
 } = require("../../DB/DB.Tables/DAO-users");
-const { checkIfLogin, performLogin,performLogout} = require("../../Services/Auth/LoginService");
+const {
+  checkIfLogin,
+  performLogin,
+  performLogout
+} = require("../../Services/Auth/LoginService");
 
-async function HandleUserRegister(req, res,next) {
-  const { username, password, email_id } = req.body;
-  const date=new Date()
+async function HandleUserRegister(req, res, next) {
+  const {
+    username,
+    password,
+    email_id,
+    profile_image,
+    registered_date
+  } = req.body;
   GetUser(username)
     .then(async (result) => {
-      if (result===undefined) {
+      if (result === undefined) {
         try {
-          await CreateUser(username, password, email_id,date);
+          await CreateUser(username, password,
+            email_id, profile_image, registered_date);
           res.send("Registered successfully");
         } catch (err) {
           next(err);
         }
       } else {
-          const err = new Error("User already exits");
-          err.code = 404;
-          next(err);
+        const err = new Error("User already exits");
+        err.code = 404;
+        next(err);
       }
     })
     .catch((err) => {
@@ -27,14 +37,14 @@ async function HandleUserRegister(req, res,next) {
     });
 }
 
-function HandleUserLogin(req,res,next) {
+function HandleUserLogin(req, res, next) {
   checkIfLogin(req.cookies.__RT__)
     .then((userData) => {
       res.json(userData);
     })
     .catch((err) => {
-      performLogin(res,req.body.username, req.body.password) 
-        .then( (userData) => {
+      performLogin(res, req.body.username, req.body.password)
+        .then((userData) => {
           res.status(200).json(userData);
         })
         .catch((err) => {
@@ -48,18 +58,21 @@ async function HandleUserLogout(req, res, next) {
   res.clearCookie('__RT__');
   checkIfLogin(req.cookies.__RT__)
     .then((userData) => {
-      performLogout(req.cookies.__RT__,userData)
+      performLogout(req.cookies.__RT__, userData)
         .then(
           console.log("User Logged out")
         )
-        .catch(err)(
-          console.log(err)
-        )
+        .catch(err => {
+          console.log(err);
+        })
     })
     .catch((err) => {
       next(err);
     })
 }
 
-module.exports = {  HandleUserLogin, HandleUserRegister, HandleUserLogout};
-
+module.exports = {
+  HandleUserLogin,
+  HandleUserRegister,
+  HandleUserLogout
+};

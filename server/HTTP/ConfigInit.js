@@ -29,13 +29,13 @@ const Conf = {
     serverPort: getConf("SERVER_PORT")?.getNumber() || 8080,
   },
   connectivity: {
-    redisPort: getConf("REDIS_PORT")?.getNumber() || 6379,
-    redisHost: getConf("REDIS_HOST")?.getString() || "localhost",
-    mySqlHost: getConf("MYSQL_HOST")?.getString() || "localhost",
-    mySqlPort: getConf("MYSQL_PORT")?.getNumber() || 3306,
-    mySqlUser: getConf("MYSQL_USER")?.getString() || "parthiv",
-    mySqlDB: getConf("MYSQL_DB")?.getString() || "parthiv",
-    mySqlPassword: getConf("MYSQL_PASSWORD")?.getString() || "parthiv",
+    redisPort: 6379,
+    redisHost: "localhost",
+    mySqlHost: "localhost",
+    mySqlPort: 3306,
+    mySqlUser: "parthiv",
+    mySqlDB: "parthiv",
+    mySqlPassword:"Parthiv@65700",
   },
 };
 

@@ -15,8 +15,8 @@ post http://localhost:1337/login
 Content-Type: application/json
 
 {
-    "username":"saichand",
-    "password":"saichand13"
+    "username":"rxjxtvmsyyczoju_941",
+    "password":"hcpvgewungo_839"
 }
 
 ###
@@ -31,7 +31,7 @@ Content-Type: application/json
 }
 
 ###
-get http://localhost:1337/feed
+get http://localhost:1337/feed?offset=0
 
 ###
 get http://localhost:1337/feed/11

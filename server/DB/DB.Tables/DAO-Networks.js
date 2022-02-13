@@ -29,7 +29,7 @@ const _query={
 // defining function...
 
 
-await function RequestConnection(follower_id,following_id){
+async function RequestConnection(follower_id,following_id){
     if(typeof(follower_id) != 'number' || typeof(following_id) != 'number') {
         var err = new Error('Invalid Inputs');
         err.srvMessage = "follower_id or following_id is not a number(invalid input) for GetUser By Id";
@@ -44,7 +44,7 @@ await function RequestConnection(follower_id,following_id){
     }
 } 
 
-function AcceptConnection(follower_id,following_id){
+async function AcceptConnection(follower_id,following_id){
     if(typeof(follower_id) != 'number' || typeof(following_id) != 'number') {
         var err = new Error('Invalid Inputs');
         err.srvMessage = "follower_id or following_id is not a number(invalid input) for GetUser By Id";
@@ -59,7 +59,7 @@ function AcceptConnection(follower_id,following_id){
     }   
 }
 
-function GetPendingNetworks(following_id){
+async function GetPendingNetworks(following_id){
     if(typeof(follower_id) != 'number' || typeof(following_id) != 'number') {
         var err = new Error('Invalid Inputs');
         err.srvMessage = "follower_id or following_id is not a number(invalid input) for GetUser By Id";
@@ -75,7 +75,7 @@ function GetPendingNetworks(following_id){
     
 }
 
-function GetRecommendedNetworks(){
+async function GetRecommendedNetworks(){
     if(typeof(follower_id) != 'number' || typeof(following_id) != 'number') {
         var err = new Error('Invalid Inputs');
         err.srvMessage = "follower_id or following_id is not a number(invalid input) for GetUser By Id";
@@ -91,7 +91,7 @@ function GetRecommendedNetworks(){
     
 }
 
-function DropConnectionFromPending(follower_id,following_id){
+async function DropConnectionFromPending(follower_id,following_id){
     if(typeof(follower_id) != 'number' || typeof(following_id) != 'number') {
         var err = new Error('Invalid Inputs');
         err.srvMessage = "follower_id or following_id is not a number(invalid input) for GetUser By Id";
