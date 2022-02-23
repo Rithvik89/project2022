@@ -1,60 +1,28 @@
-import {Card,Button,Container} from 'react-bootstrap'
-import {useParams} from 'react-router-dom'
+import {Container} from 'react-bootstrap'
+import {useParams,useLocation,useNavigate} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { AiFillLike } from "react-icons/ai";
-import { FaShare } from "react-icons/fa";
-import Comment from '../Components/Comment';
 import CommentSection from './CommentSection';
 import './index.css'
+import PostCard from '../Components/postCard';
 
 function FeedBody(){
-
-   const {id}=useParams()
-
-    var height;
-    height = Math.floor(Math.random()*(400)+100);
-    console.log(height);
-
-    var link = "https://picsum.photos/"+height+"/"+height;
-    console.log(link)
-    const postDetails={
-      'id':id,
-      'user':`#rithvik_${height}`,
-      'content':" They are low on confidence, their form has hit a terrible trough, and on Monday when the situation demanded it, India's most-experienced batting pair was unable to handle the heat in the kitchen",
-      'link':link
+    const Location=useLocation();
+    const navigate=useNavigate();
+    const {post,prevPath}=Location.state;
+    console.log(prevPath)
+    function handleGoBack(){
+       navigate(prevPath)
     }
-
+  
     return(
         <div className='feed-comment-mid-section'>
-            <Card className="text-center feed-cards">
-                    
-                    <Card.Header>
-                        <div className="feed-content-card-header">
-                            <Card.Img variant="top" src={link}  className='feed-main-card-img'/>
-                            <h4 className='feed-content-user-handle'>{postDetails.user}</h4>
-                        </div>
-                    </Card.Header>
-
-                        <Card.Body>
-                            <Card.Title>Concerned in senior players form</Card.Title>
-                            <Card.Text>
-                                {postDetails.content}
-                            </Card.Text>
-                        </Card.Body>
-
-                    <Card.Footer className="text-muted">
-                    <div className="feed-content-metadata">
-                        <Button variant="outline-dark"> <AiFillLike fontSize="25px"/></Button>
-                        <Comment postDetails={postDetails}/>
-                        <Button variant="outline-dark"> <FaShare fontSize="20px"/></Button>
-                    </div>
-                    </Card.Footer>
-
-                </Card>
-
-               <Container>
-                   <CommentSection/>
-               </Container>
+            <div>
+               <img className='back-button-full-post' onClick={handleGoBack} src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAABPElEQVRoge3ZIUsEURSG4Ud3LQaxiVEw2xfEbDFa/Q8mf4YYzTaLWdwgIhZBDBYxCTbBJigoGnYX7oq7zizi3IP3hROmveeDuXPuGQqFQuE/0MEVTpoWqcssdvGGD9w0q1OPVdzqiQ9qq1GjisxhD++G5e/QbtCrEuu4NyweIv157PtePPv0N/BgtHy26S/g0HjxbNPfxKOf5bNLfxFHqolnlf6UXpJPqstnk/4SuuqJZ5F+C9t4Vl/+r+p8lPwyTjMQrFJDtLGDlwzEajewgssMhGo3MNNP/TUDmYkauMhAYuKaHnQRlRYO9I7Ktf5zWMK+xCmhj9GUsB+ylAijxNm4BgaEHeZSQo/TKWEvNF8Je6VMCX2pTwm7VkkJvdhKCbtaTAm93E0Ju15PCf2DI6WDaxw3LVIoFAq/yyfDMHP5FamJXwAAAABJRU5ErkJggg=="/>
+            </div>
+            <PostCard post={post}/>
+            <Container>
+                <CommentSection/>
+            </Container>
         </div>
     )
 }

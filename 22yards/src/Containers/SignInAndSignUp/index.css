@@ -1,28 +1,61 @@
-.signInSignUp-container{
+.signIn-signUp-Page-Container{
     display: flex;
+    height: 100vh;
+    width: 100vw;
     justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: calc(100vh - 69px);
+    padding-top: 60px;
+    /* background-color: skyblue; */
+    padding-bottom: 5px;
 }
-.signin-signup-button-container{
-    display: flex;
-    flex-direction: row;
+.condition-text{
+    font-size: 12px;
+    margin-bottom: 3px;
 }
-.signin-signUp-container{
+.signIn-signUp-Container{
     width: 350px;
+    background-color: white;
     height: 400px;
-    display: flex;
-    border-radius: 10px;
-}
-.login-page-button{
-    width: 175px;
-    height: 40px;
-}
-.loginpage-input-container{
+    border-radius: 20px;
+    border-top-right-radius: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    margin-top: 100px;
+    padding-left: 35px;
+    padding-right: 35px;
+  
+}
+.input-element-signIn-signUp{
+    width: 100%;
+    margin: 5px;
+    margin-left: 0px;
+    margin-right: 0px;
+    height: 40px;
+    border: 1px solid black;
+    outline: none;
+}
+
+.input-element-signIn-signUp-password{
+    width: 100%;
+    margin: 5px;
+    margin-left: 0px;
+    margin-right: 0px;
+    height: 40px;
+    border: 1px solid black;
+    outline: none;
+    margin: 0px;
+    border: none;
+}
+
+.password-container{
+    width: 100%;
+    border: 1px solid black;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    padding-right: 5px;
+}
+.showPassword{
+    background-color: -internal-light-dark(rgb(232, 240, 254), rgba(70, 90, 126, 0.4))
 }

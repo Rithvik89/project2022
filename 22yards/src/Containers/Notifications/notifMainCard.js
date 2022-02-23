@@ -4,7 +4,6 @@ import './index.css'
 function NotifMainCard(){
     var height;
     height = Math.floor(Math.random()*(400)+100);
-    console.log(height);
     var link = "https://picsum.photos/"+height+"/"+height;
     return (
         <Container  className='notif-main-card-container'>

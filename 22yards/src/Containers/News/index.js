@@ -1,8 +1,8 @@
 import React,{useEffect, useState} from "react";
 import './index.css'
-import { isMobile } from "react-device-detect";
 import SingleNewsCard from "./components/newsCard";
-import Loader from "../../Components/Loader/Loader";
+import { useDispatch, useSelector } from 'react-redux';
+import { GetNews } from "../../redux/actions/news";
 
 const temp=
 [
@@ -149,34 +149,27 @@ const temp=
 
 export default function RightFooter(){
     const [currentFetchPage,setCurrentFetchPage]=useState(2)
-    const [articlesList,setArticlesList]=useState([])
-    const [isLoading,setLoading]=useState(false)
-    async function getArticles(pageNo){  
-        setLoading(true) 
-        const res=await fetch(`https://newsdata.io/api/1/news?apikey=pub_416595014f421b1f81b9744d76817e9a10f5&category=sports&q=cricket&page=${pageNo}`,{method:"GET"})
-        const response=await res.json();
-        setLoading(false)
-        setArticlesList(response.results)
-
-    }
+    const dispatch=useDispatch()
+    const articlesList=useSelector((state)=>state.newsArticlesReducer.newsArticles)
+    
     //Coponent Initial Mount
     useEffect(()=>{
-      // getArticles(1);
+        dispatch(GetNews(1))
     },[])
     
     function loadMoreArticles(){
-        getArticles(currentFetchPage);
+        dispatch(GetNews(currentFetchPage))
         setCurrentFetchPage(currentFetchPage+1)
     }
     return(
         <div className="right-footer " style={{width:"100%"}}>
-                {
+                {/* {
               
                     temp.map((each)=>(
                        <SingleNewsCard news={each}/>
                     ))
-                } 
-                {/* {
+                }  */}
+                {
                     articlesList.length!==0 && 
                     articlesList.map((each)=>(
                        <SingleNewsCard news={each}/>
@@ -185,11 +178,9 @@ export default function RightFooter(){
                 {
                     articlesList.length===0 &&
                     <h1>No More Articles</h1>
-                }  */}
+                } 
                
                 <button onClick={loadMoreArticles}>Load More</button>
-                
-                {isLoading && <Loader/>}
         </div>
     )
 }

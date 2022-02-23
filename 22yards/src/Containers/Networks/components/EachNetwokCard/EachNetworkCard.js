@@ -5,14 +5,19 @@ import './EachNetworkCard.css'
 export default function EachNetworkCard(props){
     var height;
     height = Math.floor(Math.random()*(400)+100);
-    console.log(height);
     var link = "https://picsum.photos/"+height+"/"+height;
     return(
     <div className='network-card'>
-       <img src={link} className='netwrok-card-image'/>
-       <h6>#CRicket</h6>
-       <p>ITS ABOUT ME</p>
-       <p>{height} no of mutuals</p>
+       <img
+            className='netwrok-card-image'
+            src="/22YardsLOGO.png"
+        />
+      <img src={link} className='netwrok-card-image'/>
+       <div className='network-card-info'>
+        <h6>#CRicket</h6>
+        <p>ITS ABOUT ME</p>
+        <p>{height} no of mutuals</p>
+       </div>
     </div>
     )
 }

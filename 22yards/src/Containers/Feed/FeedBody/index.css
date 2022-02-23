@@ -1,4 +1,4 @@
-@media (min-width:1021px){
+/* @media (min-width:1021px){
     .feed-comment-mid-section{
         display:flex;
         flex-direction: column;
@@ -27,8 +27,12 @@
         height:calc(100vh - 69px);
         overflow-y:scroll;
     }
+} */
+.back-button-full-post{
+    height: 30px;
+    margin-bottom: 10px;
+    cursor: pointer;
 }
-
 .feed-comment-mid-section::-webkit-scrollbar {
     display: none;
 }

@@ -75,11 +75,12 @@
 /* Create New Post Modal Css */
 .Add-New-Post-Modal-Container{
     position: fixed;
-    top: 57px;
+    top: 0px;
     bottom: 0px;
     right: 0px;
     left:0px;
     background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10;
 }
 .Add-New-Post-Modal-Tab-Desktop{
     background-color: white;
@@ -97,12 +98,13 @@
 /* Create New Post Css */
 .Add-Post-Scrolled{
     width: 100%;
-    min-height: 80px;
     padding: 5px;
     overflow-y: auto;
     background-color: white;
-    margin-bottom: 10px;
     outline: none;
+    border: 1px solid black;
+    min-height: 36px;
+    max-height: 200px;
 }
 [contenteditable][placeholder]:empty:before {
     content: attr(placeholder);
@@ -112,8 +114,7 @@
   }
 .Add-posts-images-container{
     overflow-x: auto;
-    height: 150px;
-    border: 1px solid black;
+    height: 170px;
     width: 100%;
     padding: 8px;
 }
@@ -126,10 +127,16 @@
 }
 .button-To-Delete-Image-From-Add-Post{
     position: absolute;
-    top:0;
+    top: 0;
     right: 0;
+    height: 25px;
 }
-
+.add-post-profilepic{
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+    margin-right: 10px;
+}
 
 
 
@@ -168,23 +175,43 @@
 .feed-mid-section::-webkit-scrollbar {
     display: none;
 }
-.feed-content-card-header{
-    display:flex;
+.post-card{
+    
+    position: relative;
+    
 }
-.feed-content-user-handle{
-    margin-top: 15px;
-    margin-left: 10px;
+.post-card-user-handle{
+   font-size: 17px;
 }
-.feed-content-metadata{
+.post-card-para{
+    font-size: 13px;
+}
+.post-card-footer{
      display:flex;
      justify-content: space-around;
 }
 .feed-cards{
     border-radius: 10px;
     margin-bottom:10px;
+    display: flex;
+    background-color: white;
+    padding: 10px;
 }
 .feed-main-card-img{
     width: 56px;
     height: 56px;
     border-radius: 50%;
+    position: absolute;
+    top: 4px;
+}
+.post-card-body-container{
+    margin-left: 70px;
+}
+.feed-content-card-footer-icon{
+    height: 20px;
+    cursor: pointer;
+}
+.horizontal-line{
+    border-top: 1px solid #73716b;
+    margin-bottom: 10px;
 }

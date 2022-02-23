@@ -2,7 +2,7 @@ import { Container } from 'react-bootstrap';
 import './index.css';
 import Mainprofile from './mainProfile';
 import {Outlet,Link} from "react-router-dom";
-import Posts from '../Posts';
+
 function Profile(){
     return (
          <Container className="profile-mid-section">

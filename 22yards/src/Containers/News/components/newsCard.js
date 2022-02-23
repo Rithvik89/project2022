@@ -1,4 +1,6 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
+import { useDispatch } from "react-redux";
+import { OpenFullNews} from "../../../redux/actions/news";
 
 const randomImageUrls=[
     "https://res.cloudinary.com/du7d2nmbw/image/upload/v1643641004/WhatsApp_Image_2022-01-31_at_12.27.05_PM_2_ye9dzy.jpg",
@@ -15,28 +17,46 @@ const randomImageUrls=[
 ]
 
 export default function SingleNewsCard({news}){
-   
+    const dispatch=useDispatch()
+    const [randImage,setRandImage]=useState("")
     function randNumber(){
-        return Math.floor(Math.random()*10);
+        const v=Math.floor(Math.random()*10);
+        setRandImage(randomImageUrls[v])
     }
-
+    useEffect(()=>{
+       randNumber()
+    },[])
+   
     return(
-        <div className="d-flex mb-3 p-2" style={{border:"1px solid black",width:"100%",backgroundColor:"white"}}>
-            <div style={{width:"100%"}}>
+        <div className="d-flex mb-3 p-2" style={{width:"100%",backgroundColor:"white",borderRadius:"10px"}}>
+            <div style={{width:"100%",marginRight:"100px"}}>
                 <h6>{news.pubDate}</h6>
-                <h4>{news.title}</h4>
-                <p style={{cursor:"pointer",textDecoration:"underline"}}
+                <h4 style={{fontSize:"13px"}}>{news.title}</h4>
+                <p style={{cursor:"pointer",textDecoration:"underline",fontSize:"10px"}}
                    onClick={()=>{
-                       window.open(news.link,"_blank")
+                       news.randImage=randImage
+                       dispatch(OpenFullNews(news))
                    }}
                 >Read Full Article</p>
             </div>
-            <div className="d-flex align-items-center">
+            <div className="d-flex align-items-center" style={{position:'relative',right:"80px"}}>
                 {
-                    news.image_url && <img className="news-card-image" src={news.image_url}/>
+                    news.image_url && 
+                    <>
+                        <img
+                            alt="ad-img"
+                            className="news-card-image"
+                            src="/22YardsLOGO.png"
+                        />
+                        <img
+                            alt="ad-img"
+                            className="news-card-image"
+                            src={news.image_url}
+                        />
+                     </>
                 }
                 {
-                    !news.image_url && <img className="news-card-image" src={randomImageUrls[randNumber()]}/>
+                    !news.image_url && <img className="news-card-image" src={randImage}/>
                 }
             </div>
         </div>

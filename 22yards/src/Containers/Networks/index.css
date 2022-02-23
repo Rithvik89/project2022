@@ -1,16 +1,23 @@
 .network-mid-section{
-    display: flex;
+    /* display: flex;
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
     padding-top: 10px;
     padding-left: 0px;
-    padding-right: 0px;
-    margin-left: 10px;
-    margin-right:10px;
+    padding-right: 0px; */
+    padding: 10px;
     height:100%;
-    /* overflow-y:scroll; */
+    display: grid;
+    gap: 15px;
+    grid-template-columns: auto auto auto;
 }
+@media (max-width: 525px) {
+    .network-mid-section{
+        grid-template-columns: auto auto;
+    }
+}
+
 /* @media (max-width:649px){
    .network-mid-section{
     display: flex;
@@ -62,4 +69,69 @@
 
 .network-mid-section::-webkit-scrollbar {
     display: none;
+}
+.requests-section{
+    /* display: flex;
+    flex-wrap: wrap;   
+    justify-content: space-around;
+    margin-bottom: 10px; */
+    display: grid;
+    gap: 7px;
+    grid-template-columns: auto auto;
+}
+@media (max-width: 1050px){
+    .requests-section{
+        grid-template-columns: auto;
+        
+    }
+}
+.requests-section1{
+    display: flex;
+    flex-direction: column;
+    background-color:  white;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+.request-component-card{
+    height: 70px;
+    background-color: white;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* margin-bottom: 10px;
+    margin-right: 10px; */
+    position: relative;
+    border-radius: 10px;
+    padding: 5px;
+    padding-left: 65px;
+}
+.request-card-img{
+    position: absolute;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    left: 4px;
+}
+.request-info{
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+.request-accept-button{
+    background-color: #428ac9;
+    border-radius: 5px;
+    color: white;
+    height: 30px;
+    margin-right: 7px;
+}
+.request-reject-button{
+    background-color: #428ac9;
+    border-radius: 5px;
+    color: white;
+    height: 30px;
+    margin-right: 7px;
 }

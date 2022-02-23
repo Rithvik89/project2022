@@ -6,7 +6,7 @@ body{
     background-color: white;
     padding: 0px;
     height: 225px;
-    width: 160px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -16,11 +16,18 @@ body{
     margin-bottom: 5px;
     margin-top: 5px;
     margin-right: 2px;
+    position: relative;
 }
 .netwrok-card-image{
     width: 75px;
     height: 75px;
+    position: absolute;
     border-radius: 37.5px;
-    position: relative;
-    top: -12.5px;
+    top: 12.5px;   
+}
+.network-card-info{
+    margin-top: 77px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
