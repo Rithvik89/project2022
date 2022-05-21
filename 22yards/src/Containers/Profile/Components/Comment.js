@@ -13,9 +13,10 @@ function Comment(props){
       
         return (
           <>
-            {/* <Button variant="outline-dark" onClick={handleShow}>
+            <Button variant="outline-dark" onClick={handleShow}>
               <FaCommentAlt fontSize="20px"/>
             </Button>
+      
             <Modal show={show} onHide={handleClose}>
               <Modal.Header closeButton>
                 <Modal.Title> Replying to <h1>{user}</h1></Modal.Title>
@@ -31,8 +32,7 @@ function Comment(props){
                   Comment
                 </Button>
               </Modal.Footer>
-            </Modal> */}
-            hey
+            </Modal>
           </>
         );
 }

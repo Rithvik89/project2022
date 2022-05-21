@@ -81,21 +81,18 @@
 }
 @media (max-width: 1050px){
     .requests-section{
-        grid-template-columns: auto;
-        
+        grid-template-columns: auto; 
     }
 }
 .requests-section1{
     display: flex;
     flex-direction: column;
-    background-color:  white;
     padding-left: 6px;
     padding-right: 6px;
 }
 .request-component-card{
     height: 70px;
     background-color: white;
-    border: 1px solid black;
     display: flex;
     align-items: center;
     justify-content: center;

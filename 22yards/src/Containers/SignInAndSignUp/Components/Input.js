@@ -12,6 +12,12 @@ function Input(props){
             props.onFocusOut()
         }
     }
+    function handleKeyPress(e){
+        if(e.key==="Enter"){
+            props.handleSubmit()
+        }
+    }
+
     return(
         <input 
             className={props.className}
@@ -21,6 +27,7 @@ function Input(props){
             onFocus={handleFocusIn}
             onBlur={handleFocusout}         
             style={props.style}
+            onKeyPress={handleKeyPress}
             //style={{borderColor:"yellow"}}   
         />
     )

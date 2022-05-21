@@ -29,6 +29,9 @@
 .logo-navbar{
     height: 50px;
 }
+.logo-nav-bar-mobile{
+    display: none;
+}
 .nav-bar-list{
     list-style-type: none;
     display: flex;
@@ -67,7 +70,7 @@
     cursor: pointer;
     margin-left: 10px;
 }
-@media screen and (max-width: 600px){
+@media screen and (max-width: 801px){
     .nav-bar-list{
         display: none;
     }
@@ -79,6 +82,7 @@
         top: 60px;
         height: 100%;
         padding: 0px;
+        z-index: 10;
     }
     .btn-in-mobile{
         display: block;
@@ -86,9 +90,18 @@
         height: 30px;
        
     }
-    
+    .logo-nav-bar-mobile{
+        display: block;
+        height: 50px;
+        position: absolute;
+        top: 5px;
+        left: 41%;
+    }
     .nav-bar-item-mobile-link{
         text-decoration: none;
+    }
+    .logo-navbar{
+        display: none;
     }
     .nav-bar-item-mobile{
       padding: 15px;
@@ -103,4 +116,9 @@
         height: 30px;
         cursor: pointer;   
     }
+}
+
+.saveTheProfile{
+    height: 40px;
+    cursor: pointer;
 }

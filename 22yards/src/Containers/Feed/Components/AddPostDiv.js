@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useEffect, useRef, useState} from "react";
 import ImageInCarousal from "./ImageInCarousal";
 import ImageView from "../../../Components/ImageView/ImageView";
 
@@ -9,6 +9,15 @@ var link1 = "https://picsum.photos/"+height1+"/"+height1;
 export default function AddPostDiv(props){
     const [imagesInAddPost1,setImagesInAddPost1]=useState([])
     const [urlOfImage1,setUrlOfImage1]=useState("")
+    const [textAreaHeight, setTextAreaHeight] = useState("auto");
+    const [parentHeight, setParentHeight] = useState("auto");
+    const postTextArea=useRef(null)
+    const [newPostContent,setNewPostContent]=useState("")
+
+    useEffect(()=>{
+      setParentHeight(`${postTextArea.current.scrollHeight}px`);
+      setTextAreaHeight(`${postTextArea.current.scrollHeight}px`);
+    },[newPostContent])
 
     function addImagesToPost1(event){
         const x=event.target.files;
@@ -19,25 +28,46 @@ export default function AddPostDiv(props){
         ))
         setImagesInAddPost1([...imagesInAddPost1,...y])
       }
-      function handleDeleteAImagefromAddPosts1(indexUrlToDelete){
+    function handleDeleteAImagefromAddPosts1(indexUrlToDelete){
         var x=imagesInAddPost1;
         x.splice(indexUrlToDelete,1)
         setImagesInAddPost1([...x])
-      }
+    }
+
+    function handlePostContentChange(e){
+       setNewPostContent(e.target.value)
+       setTextAreaHeight("auto");
+       setParentHeight(`${postTextArea.current.scrollHeight}px`);
+    }
     
     return(
         <>
+        {console.log(newPostContent)}
         <div>
             <img onClick={()=>{props.onClose()}} style={{height:"25px",marginTop:"10px",marginLeft:"10px",cursor:"pointer"}} src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAABNUlEQVRoge2Y3WrCQBBGT/uApi2KF+2zK1gUS39ewIK9cAckbILZ2ZlscQ7k9pvvJCSZBIIgCAJDVsAXsAeeHOc+A0fgB1iXhjwAn8A5HSdN2ATWaZbM/U5divi4CvKQ6Jc/pw7FvGQCrSRy5U+pg4plJvgXeNMGX7EamPFaa4ClhHl5wULCrbxQU8K9vFBDYrbygkZi9vJCiUQz5YUpEs2VF26RaLa8MCbRfHlhaBXwWkWqkLsSzZ/5PkMSJuUfawcyvrsX7/Ve5G5Yyy22Kv/6Jh57VHp8T6i45TnfrMSUl1RzEiVv2GYkNOvB7BI1dpvZJGouZu4SFlulm4TlSmwu4bHPm0l0mWDvX4udJvQ9E+j9c3enCTzgV17oSxw0YR2XM7BBeSkL5m7T7IXj3CAIgnvjD0N9VJOZexifAAAAAElFTkSuQmCC"/>
             <div className='d-flex flex-column p-2 mb-2' style={{backgroundColor:"white"}}>
-                <div className='d-flex mb-1'>
+                <div className='d-flex mb-1' style={{width:"100%"}}>
                   <div className='d-flex justify-content-start'>
                       <img src={link1} className='add-post-profilepic'/>
                   </div>
-                  <div className='d-flex align-items-center' style={{width:"100%"}}>
-                    <div placeholder='say' className='Add-Post-Scrolled' contentEditable>
-                    </div>
+                  <div style={{
+                      minHeight: parentHeight,
+                      width:"100%",
+                  }}>
+                    <textarea  
+                        ref={postTextArea}
+                        rows={1}
+                        style={{
+                            height: textAreaHeight,
+                        }}
+                        maxLength="100"
+                        className="Add-Post-Scrolled"
+                        onChange={handlePostContentChange}
+                      >
+                          
+                      </textarea>
                   </div>
+                
                 </div>
                 {
                   imagesInAddPost1.length!==0 &&
@@ -126,6 +156,9 @@ export default function AddPostDiv(props){
             </span>
             </label>
             <input type="file" multiple id="uploadImagesInAddPostRef1" accept='image/*' style={{display:"none"}} onChange={addImagesToPost1}/> */}
+        <div className="d-flex justify-content-center">
+           <button className="btn btn-primary mb-2">Post</button>
+        </div>
         </div>
         {urlOfImage1!=="" && <ImageView src={urlOfImage1} CloseThisImage={()=>{
                 setUrlOfImage1("")

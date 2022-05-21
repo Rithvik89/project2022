@@ -10,7 +10,6 @@ function* getNewsAsync(action){
     try{
         yield put(LoaderStart())
         const response=yield call(APIforNews,action.payload)
-        // console.log("news",response)
         yield put(LoaderStop())
         if(response.status==='success'){
            toast.success("News Updated");

@@ -96,22 +96,22 @@
 }
 
 /* Create New Post Css */
-.Add-Post-Scrolled{
-    display: block;
+/* .Add-Post-Scrolled{
     width: 100%;
-    overflow: hidden;
+    padding: 5px;
+    overflow-y: auto;
+    background-color: white;
     outline: none;
-    resize: none;
-    min-height: 40px;
     border: 1px solid black;
-    padding: 2px;
-    padding-left: 5px;
-    padding-right: 5px;
-    line-height: 35px;
-    font-size: 20px;
-    margin-bottom: 10px;
-    white-space: pre-line;
+    min-height: 36px;
+    max-height: 200px;
 }
+[contenteditable][placeholder]:empty:before {
+    content: attr(placeholder);
+    position: absolute;
+    color: gray;
+    background-color: transparent;
+} */
 .Add-posts-images-container{
     overflow-x: auto;
     height: 170px;
@@ -145,6 +145,9 @@
 .Add-Images-In-AddPost-Button{
    cursor: pointer;
 }
+/* .Add-Post-Scrolled::selection{
+    border: 0px;
+} */
 .add-post-text-area{
     width:95%;
     height:100%;
@@ -189,19 +192,11 @@
 }
 .feed-cards{
     border-radius: 10px;
-    margin-bottom: 5px;
+    margin-bottom:10px;
     display: flex;
     background-color: white;
+    padding: 10px;
 }
-.feed-card-container{
-   display: flex;
-   flex-direction: column;
-   background-color: white;
-   border-radius: 10px;
-   margin-bottom: 10px;
-   padding: 10px;
-}
-
 .feed-main-card-img{
     width: 56px;
     height: 56px;

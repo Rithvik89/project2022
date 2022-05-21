@@ -37,3 +37,16 @@ export const LogoutSuccess=()=>({
 export const LogoutFailure=()=>({
     type:AuthActionTypes.LOGOUT_FAILURE
 })
+
+export const SetUserDetails=(userDetails)=>({
+     type:AuthActionTypes.SET_USER_DETAILS,
+     payload:userDetails
+})
+
+export const GetUserDetails=()=>({
+     type:AuthActionTypes.GET_USER_DETAILS
+})
+
+export const SetIsRegisteredFalse=()=>({
+     type:AuthActionTypes.SET_IS_REGISTERED_FALSE
+})

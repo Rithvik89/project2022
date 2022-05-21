@@ -51,6 +51,7 @@
     display:flex;
     flex-direction: column;
     overflow-y:scroll;
+    width: 100%;
 }
 .profile-mid-section::-webkit-scrollbar {
     display: none;
@@ -58,27 +59,35 @@
 .profile-mid-section{
     padding: 0%;
 }
+.profile-main-card{
+    border-radius: 10px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    background-color: white;
+    position: relative;
+}
 .profile-main-card-bg-img{
     width: 100%;
     height: 250px;
     border-radius: 10px;
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
+    border-bottom: 1px solid black;
 }
-.profile-main-card-img{
+.profile-main-card-profile-img{
    width: 160px;
    height: 160px;
    padding: 0%;
    border-radius: 50%;
+   position: absolute;
+   left: 5px;
+   top: 180px;
 }
 .profile-main-card-body{
-    margin: 3%;
-    margin-top: 1%;
-    padding: 0%;
+   padding: 15px;
+   padding-top: 95px;
 }
-.profile-main-card{
-    border-radius: 10px;
-}
+
 .profile-main-card-body > p,h4{
   margin:0%
 }
@@ -109,21 +118,73 @@ button{
     border: 0px;
 }
 .profile-links-container{
-    height: 10%;
+    height: 60px;
     display: flex;
     flex-direction: row;
-    /* gap:20%; */
-    /* align-items: center; */
-    justify-content: center; 
+    justify-content: space-around; 
+    align-items: center;
+    flex-shrink: 0;
     background-color: lightslategrey;
-    /* padding: 0%; */
 }
 .profile-links{
     display: block;
-    width: 30%;
     text-align: center;
     text-decoration: none;
     font-size: 17px;
     color: white;
-    padding: 3%;
+    cursor: pointer;
+    margin: 0px;
+}
+.only-visible-to-you{
+    color: gray;
+    font-size: 12px;
+}
+.editing-bio-div{
+  /* outline: none;
+  border: none; */
+  /* resize: vertical; */
+  /* border-bottom: 1px solid black; */
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  outline: none;
+  resize: none;
+  min-height: 40px;
+  border: 0px; 
+  border-bottom: 1px solid black;
+  padding: 2px;
+  line-height: 35px;
+  font-size: 20px;
+  margin-bottom: 10px;
+  white-space: pre-line;
+}
+.editing-container{
+    margin: 10px;
+}
+.editprofile-main-card-profile-img{     
+   width: 130px;
+   height: 130px;
+   padding: 0%;
+   border-radius: 50%;
+   
+}
+.edit-image-icon{
+    height: 30px;
+    margin-left: 5px;
+}
+
+.ipl-team-logo-div{
+    display: flex;
+    /* flex-wrap: wrap; */
+    overflow-x: scroll;
+   
+    padding: 10px;
+}
+
+.ipl-team-logo-image{
+    height: 75px;
+    width: 75px;
+    border-radius: 10%;
+    margin-bottom: 10px;
+    margin-right: 10px;
 }

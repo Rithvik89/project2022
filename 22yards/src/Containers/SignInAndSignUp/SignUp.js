@@ -18,6 +18,7 @@ export default function SignUp(){
     const [showpasswordError,setPasswordError]=useState(false)
     const [colorOfPasswordCondition,setColorOfPasswordCondition]=useState("red")
     const [colorOfMinCharacters,setColorOfMinCharacters]=useState("red")
+    const [doUserNameContainSpace,setUserNameContainSpace]=useState(false)
     
     const dispatch=useDispatch()
     useEffect(()=>{
@@ -51,7 +52,12 @@ export default function SignUp(){
     //UserName input Change
     function handleUserNameInputChange(val){
         setInputTextUserName(val)
-        
+        // console.log(val.includes(" "))
+        if(val.includes(" ")){
+            setUserNameContainSpace(true)
+        }else{
+            setUserNameContainSpace(false)
+        }
     }
     //email Input Change
     function handleMailInputChange1(val){
@@ -68,7 +74,7 @@ export default function SignUp(){
     //Sumbit
     function handleSignUp(){
         setPasswordError(false)
-        if(inputTextPasword1===inputTextRePasword && inputTextMail1!=="" && inputTextUserName!=="" && colorOfPasswordCondition==="green"){
+        if(inputTextPasword1===inputTextRePasword && inputTextMail1!=="" && inputTextUserName!=="" && colorOfPasswordCondition==="green" && !doUserNameContainSpace){
             const SignUpCredentials={
                 email_id:inputTextMail1,
                 username:inputTextUserName,
@@ -90,6 +96,9 @@ export default function SignUp(){
         }
         if(colorOfPasswordCondition!=="green"){
             toast.error("Please Try A New Password")
+        }
+        if(doUserNameContainSpace){
+            toast.error("UserName shouldn't contain spaces")
         }
     }
     //show passowrd or not 
@@ -150,17 +159,21 @@ export default function SignUp(){
                        type="text" 
                        onChange={handleUserNameInputChange} 
                        placeholder="username"
+                       handleSubmit={handleSignUp}
                        className="input-element-signIn-signUp"/>
+                    {doUserNameContainSpace && <Condition text="username shouldn't contain space" color="red"/>}
                     <Input 
                         type="text" 
                         onChange={handleMailInputChange1} 
                         placeholder="Mail Id"
+                        handleSubmit={handleSignUp}
                         className="input-element-signIn-signUp"/>
                     <div className="password-container mb-2">
                        <Input 
                          type={passwordDisplayType} 
                          onChange={handlePasswordInputChange1} 
                          placeholder="password"
+                         handleSubmit={handleSignUp}
                          onFocus={handleOnFocusPassword}
                          onFocusOut={handleOnFocusOutPassword}
                          className="input-element-signIn-signUp-password"
@@ -183,6 +196,7 @@ export default function SignUp(){
                            type={rePasswordDisplayType} 
                            onChange={handleRePasswordInputChange} 
                            placeholder="re-enter password"
+                           handleSubmit={handleSignUp}
                            onFocus={handleOnFocusRePassword}
                            onFocusOut={handleOnFocusOutRePassword}
                            style={styleOfRePassword}

@@ -9,7 +9,7 @@ export default function Loader(){
     return(
         <div className="loaderContainer d-flex justify-content-center align-items-center">
             {!isDesktop && <img src="/LogoRed.jpeg" style={{width:"60vw"}}/>}
-            { isDesktop && <img src="/LogoRed.jpeg" className="loader22yardsimage"/>}
+            { isDesktop && <img src="/LogoRed.jpeg" className="loader22yardsimage" style={{width:"40vw"}}/>}
             <ClipLoader  size={35} color={"red"}/>
         </div>
     )

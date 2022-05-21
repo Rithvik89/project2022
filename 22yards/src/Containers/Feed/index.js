@@ -2,10 +2,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import FeedContent from './Components/feedContent.js';
 import './index.css'
 import ImageView from '../../Components/ImageView/ImageView.js';
-import React,{useState} from 'react'
+import React,{useState, useRef} from 'react'
 import ImageInCarousal from './Components/ImageInCarousal.js';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+
 import { LoaderStart,LoaderStop } from '../../redux/actions/Loader.js';
 
 var height1;
@@ -31,17 +32,28 @@ function Feed(){
   const [urlOfImage,setUrlOfImage]=useState("")
   const dispatch=useDispatch()
   const [posts,setPosts]=useState([])
+  const [textAreaHeight, setTextAreaHeight] = useState("auto");
+  const [parentHeight, setParentHeight] = useState("auto");
+  const postTextArea1=useRef(null)
+  const [newPostContent,setNewPostContent]=useState("")
 
   useEffect(()=>{
-    dispatch(LoaderStart())
+    //dispatch(LoaderStart())
     var w=[]
     for(var i=0;i<8;i++){
       var x=createFeed(i);
       w.push(x);
     }  
     setPosts([...w])
-    setTimeout(() => dispatch(LoaderStop()), 1000);
+    //setTimeout(() => dispatch(LoaderStop()), 1000);
   },[])
+
+
+  useEffect(()=>{
+    setParentHeight(`${postTextArea1.current.scrollHeight}px`);
+    setTextAreaHeight(`${postTextArea1.current.scrollHeight}px`);
+  },[newPostContent])
+
   function addImagesToPost(event){
     const x=event.target.files;
     const fileArray = x ? Array.from(x) : [];
@@ -56,13 +68,19 @@ function Feed(){
     x.splice(indexUrlToDelete,1)
     setImagesInAddPost([...x])
   }
+  
+  function handlePostContentChange(e){
+    setNewPostContent(e.target.value)
+    setTextAreaHeight("auto");
+    setParentHeight(`${postTextArea1.current.scrollHeight}px`);
+  }
 
   return (
     <div className="d-flex flex-column"
          style={{width:"100%"}}>   
           <div>
             <div className='d-flex flex-column p-2 mb-2' style={{backgroundColor:"white",borderRadius:"10px"}}>
-                <div className='d-flex mb-1'>
+                {/* <div className='d-flex mb-1'>
                   <div className='d-flex justify-content-start'>
                       <img src={link1} className='add-post-profilepic'/>
                   </div>
@@ -70,7 +88,31 @@ function Feed(){
                     <div placeholder='say' className='Add-Post-Scrolled' contentEditable>
                     </div>
                   </div>
+                </div> */}
+                <div className='d-flex mb-1' style={{width:"100%"}}>
+                  <div className='d-flex justify-content-start'>
+                      <img src={link1} className='add-post-profilepic'/>
+                  </div>
+                  <div style={{
+                      minHeight: parentHeight,
+                      width:"100%",
+                  }}>
+                    <textarea  
+                        ref={postTextArea1}
+                        rows={1}
+                        style={{
+                            height: textAreaHeight,
+                        }}
+                        maxLength="500"
+                        className="Add-Post-Scrolled"
+                        onChange={handlePostContentChange}
+                      >
+                          
+                      </textarea>
+                  </div>
+                
                 </div>
+                
                 {
                   imagesInAddPost.length!==0 &&
                       <div className='d-flex flex-row Add-posts-images-container'>

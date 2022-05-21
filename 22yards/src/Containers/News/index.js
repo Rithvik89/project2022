@@ -171,8 +171,8 @@ export default function RightFooter(){
                 }  */}
                 {
                     articlesList.length!==0 && 
-                    articlesList.map((each)=>(
-                       <SingleNewsCard news={each}/>
+                    articlesList.map((each,index)=>(
+                       <SingleNewsCard news={each} key={index}/>
                     ))
                 } 
                 {

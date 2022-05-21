@@ -19,11 +19,11 @@ import Loader from './Components/Loader/Loader';
 import { useDispatch, useSelector } from 'react-redux';
 import FullNewsPage from './Containers/News/components/FullNewsCard';
 import Routings from './Routes';
-import Home from './Containers/Home';
 import SignIn from "./Containers/SignInAndSignUp/SignIn";
 import SignUp from "./Containers/SignInAndSignUp/SignUp";
-import { SignInSuccess,SignInFailure } from './redux/actions/Auth';
+import { SignInSuccess,SignInFailure, SetIsRegisteredFalse , GetUserDetails} from './redux/actions/Auth';
 import Cookies from "js-cookie"
+import { decodeToken } from "react-jwt";
 
 function App(){
   const [pathWhereIAm,setPathWhereIAm]=useState("")
@@ -34,16 +34,42 @@ function App(){
   const isPageLoading=useSelector((state)=>state.loaderReducer.isPageLoading)
   const isFullNewsOpen=useSelector((state)=>state.newsArticlesReducer.isFullNewsOpen)
   const isUserLoggedIn=useSelector((state)=>state.authReducer.isUserLoggedIn)
-  
-  useEffect(()=>{
+  const isUserRegistered=useSelector((state)=>state.authReducer.isUserRegistered)
+  const loggedInUserDetails=useSelector((state)=>state.authReducer.loggedInUserDetails);
+
+  useEffect(async ()=>{
      const Token=Cookies.get("Token")
      if(Token!==undefined){
-      console.log("token",Token)
+        console.log("sign In success")
         dispatch(SignInSuccess())
+        // const x=decodeToken(Token)
+        // if(!x.bio){
+        //    x.bio=""
+        // }
+        // if(!x.profile_image){
+        //    x.profile_image=""
+        // }
+        // console.log(x)
+        // dispatch(SetUserDetails(x))
+        dispatch(GetUserDetails())
+        navigate(location.pathname)
      }else{
        dispatch(SignInFailure())
      }
-  })
+     console.log("currentpath",location.pathname)
+  },[])
+
+  useEffect(()=>{
+    if(loggedInUserDetails.username){
+      console.log("abcd",loggedInUserDetails.username,isUserRegistered)
+      if(isUserRegistered){
+        
+         dispatch(SetIsRegisteredFalse())
+         navigate(`profile/${loggedInUserDetails.username}`)
+      }
+    }
+  },[loggedInUserDetails])
+  
   useEffect(()=>{
     const {pathname} = location;
     setPathWhereIAm(pathname)
@@ -71,7 +97,7 @@ function App(){
           { isPageLoading && <Loader/>}
           <ToastContainer 
             position="bottom-left"
-            autoClose={2000}
+            autoClose={1500}
             hideProgressBar={true}
             newestOnTop
             closeOnClick
@@ -87,9 +113,7 @@ function App(){
       <div>
         { isTablet && 
           <div>
-            <div className="header">
-              <Header/>
-            </div>
+            
             <div className='routing-page d-flex' style={{height:"100%",overflow:"scroll"}}>
                   { 
                   pathWhereIAm!=="/home" && pathWhereIAm!=="/signIn" && pathWhereIAm!=="/signUp" &&
@@ -109,6 +133,9 @@ function App(){
                               style={{position:"fixed",bottom:"10px",left:"53vw"}}
                       >+</button>
                   }
+              </div>
+              <div className="header">
+                 <Header/>
               </div>
               { showTheAddPostModal&&<AddPost onClose={()=>{setShowTheAddPostModal(false)}} x={1}/>}
           </div>
@@ -198,7 +225,7 @@ function App(){
         { isPageLoading && <Loader/>}
         <ToastContainer 
           position="bottom-left"
-          autoClose={2000}
+          autoClose={1500}
           hideProgressBar={true}
           newestOnTop
           closeOnClick

@@ -2,6 +2,7 @@ import {Link,useLocation} from 'react-router-dom'
 import { useState } from 'react'
 import Comment from './Comment'
 import DefaultImageURL from '../../../Util/Icons/index'
+import "./index.css"
 
 export default function PostCard({post}){
     const [isPostLiked,setPostLike]=useState(false)
@@ -22,7 +23,7 @@ export default function PostCard({post}){
     }
     
     return(
-        <div className='feed-card-container'>
+        <>
             <div className="feed-cards">
                 <div className="post-card">
                     <img
@@ -69,17 +70,12 @@ export default function PostCard({post}){
                 </div>
             </div>
             {  isCommentRedirected && 
-             <>
-                <hr style={{marginBottom:"1px"}}></hr>
-                <hr style={{marginTop:"1px",marginBottom:"1px"}}></hr>
-                <hr style={{marginTop:"1px",marginBottom:"1px"}}></hr>
-                <Comment postDetails={post}/>
-              </>
+            <Comment postDetails={post}/>
             }
            {/* <hr style={{color:"black",backgroundColor:"black",marginTop:"0px",height:"5"}}/> */}
            {/* <div className='horizontal-line'>
 
            </div> */}
-       </div>
+       </>
     )
 }

@@ -2,6 +2,8 @@ import AuthActionTypes from "../actionTypes/Auth";
 
 const INTIAL_STATE={
     isUserLoggedIn:false,
+    isUserRegistered:false,
+    loggedInUserDetails:{}
 }
 
 const AuthReducer=(state=INTIAL_STATE,action)=>{
@@ -13,10 +15,20 @@ const AuthReducer=(state=INTIAL_STATE,action)=>{
                 ...state,
             }
         case AuthActionTypes.SIGNIN_SUCCESSFUL:
-        case AuthActionTypes.SIGNUP_SUCCESSFUL:
             return{
                 ...state,
                 isUserLoggedIn:true,
+            }
+        case AuthActionTypes.SIGNUP_SUCCESSFUL:
+            return{
+                ...state,
+                isUserRegistered:true,
+                isUserLoggedIn:true,
+            }
+        case AuthActionTypes.SET_IS_REGISTERED_FALSE:
+            return{
+                ...state,
+                isUserRegistered:false
             }
         case AuthActionTypes.LOGOUT_FAILURE:
             return{
@@ -28,6 +40,11 @@ const AuthReducer=(state=INTIAL_STATE,action)=>{
             return{
                 ...state,
                 isUserLoggedIn:false
+            }
+        case AuthActionTypes.SET_USER_DETAILS:
+            return{
+                ...state,
+                loggedInUserDetails:action.payload
             }
         default:
             return state
